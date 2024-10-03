@@ -34,11 +34,19 @@ const showProject = async function(thumbnail, projectId) {
     project.style.height = `${projectHeight}px`;
 };
 
-const closeProject = function () {
+const closeProject = async function () {
     //console.log(currentProject);
     if (currentProject) {
-        currentProject.style.display = "none";
+        const project = currentProject;
         currentProject = null;
+        const startBox = document.querySelector(`#${project.id}-thumbnail`).getBoundingClientRect();
+        project.style.top = `${startBox.top}px`;
+        project.style.left = `${startBox.left}px`;
+        project.style.width = `${startBox.width}px`;
+        project.style.height = `${startBox.height}px`
+        await delay(750);
+        project.style.display = "none";
+        
     }
 };
 
@@ -49,3 +57,26 @@ document.addEventListener("click", function (event) {
         closeProject(currentProject);
     }
 });
+
+const test = async function () {
+    while (true) {
+        const char = document.createElement("p");
+        char.className = "randLetter";
+        char.style.left = `${Math.random() * (window.innerWidth - char.getBoundingClientRect().width)}px`;
+        char.style.top = `${Math.random() * (window.innerHeight - char.getBoundingClientRect().height)}px`;
+
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=;:\'\"[{]}\\|`~,<.>/?";
+        char.innerHTML = characters.charAt(Math.floor(Math.random() * characters.length));
+        document.querySelector("#rand").appendChild(char);
+        await delay();
+        char.style.opacity = "1";
+        setTimeout(() => removeChar(char), 1000);
+        await delay(500);
+    }
+};
+
+const removeChar = async function (element) {
+    element.style.opacity = "0";
+    await delay(1000);
+    element.remove();
+};

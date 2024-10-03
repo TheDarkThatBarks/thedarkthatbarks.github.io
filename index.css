@@ -3,13 +3,20 @@ html {
 }
 
 body {
+    height: 100%;
+    /*margin: 0;*/
+    /*color: rgb(204, 204, 204);*/
+    color: rgb(22, 198, 12);
+    background-color: rgb(12, 12, 12);
+    font-family: Kode Mono;
+}
+
+#main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    /*height: 100%;*/
     margin: 0;
-    color: rgb(204, 204, 204);
-    background-color: rgb(12, 12, 12);
 }
 
 #projects {
@@ -34,7 +41,7 @@ body {
 .project {
     position: fixed;
     background: #CCC;
-    outline: 5px solid black;
+    outline: 5px solid rgb(22, 198, 12);
     width: 80%;
     aspect-ratio: 16/9;
     transition: all 0.75s;
@@ -43,7 +50,7 @@ body {
 }
 
 #test {
-    background-color: blue;
+    background-color: rgb(12, 12, 12);
 }
 
 #test2 {
@@ -55,4 +62,12 @@ body {
     height: 10%;
     aspect-ratio: 1/1;
     right: 0;
+}
+
+.randLetter {
+    position: fixed;
+    z-index: -1;
+    font-size: 3vw;
+    transition: opacity 1s;
+    opacity: 0;
 }
