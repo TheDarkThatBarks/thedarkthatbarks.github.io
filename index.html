@@ -1,7 +1,38 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <title>Ellys Gorodisch</title>
+    <script src="index.js"></script>
+</head>
+<body onload="refresh()">
+<pre>
+   ▄████████  ▄█        ▄█       ▄██   ▄      ▄████████         ▄██████▄   ▄██████▄     ▄████████  ▄██████▄  ████████▄   ▄█     ▄████████  ▄████████    ▄█    █▄ 
+  ███    ███ ███       ███       ███   ██▄   ███    ███        ███    ███ ███    ███   ███    ███ ███    ███ ███   ▀███ ███    ███    ███ ███    ███   ███    ███
+  ███    █▀  ███       ███       ███▄▄▄███   ███    █▀         ███    █▀  ███    ███   ███    ███ ███    ███ ███    ███ ███▌   ███    █▀  ███    █▀    ███    ███
+ ▄███▄▄▄     ███       ███       ▀▀▀▀▀▀███   ███              ▄███        ███    ███  ▄███▄▄▄▄██▀ ███    ███ ███    ███ ███▌   ███        ███         ▄███▄▄▄▄███▄▄
+▀▀███▀▀▀     ███       ███       ▄██   ███ ▀███████████      ▀▀███ ████▄  ███    ███ ▀▀███▀▀▀▀▀   ███    ███ ███    ███ ███▌ ▀███████████ ███        ▀▀███▀▀▀▀███▀
+  ███    █▄  ███       ███       ███   ███          ███        ███    ███ ███    ███ ▀███████████ ███    ███ ███    ███ ███           ███ ███    █▄    ███    ███
+  ███    ███ ███▌    ▄ ███▌    ▄ ███   ███    ▄█    ███        ███    ███ ███    ███   ███    ███ ███    ███ ███   ▄███ ███     ▄█    ███ ███    ███   ███    ███
+  ██████████ █████▄▄██ █████▄▄██  ▀█████▀   ▄████████▀         ████████▀   ▀██████▀    ███    ███  ▀██████▀  ████████▀  █▀    ▄████████▀  ████████▀    ███    █▀
+             ▀         ▀                                                               ███    ███
+</pre>
+</div>
+<h2>About Me</h2>
+<p>Description here</p>
+<div id="projects">
+    <div class="thumbnail" id="test-thumbnail" onclick="showProject(this, 'test')"></div>
+    <div class="thumbnail" id="test2-thumbnail" onclick="showProject(this, 'test2')"></div>
+    <div class="thumbnail"></div>
+    <div class="thumbnail"></div>
+</div>
+<div class="project" id="test" hidden>
+    <h1>Game</h1>
+    <p>Test</p>
+    <button class="close" onclick="closeProject()">X</button>
+</div>
+<div class="project" id="test2" hidden>
+    <button class="close" onclick="closeProject()">X</button>
+</div>
 </body>
 </html>

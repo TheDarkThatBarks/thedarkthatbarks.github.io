@@ -1,0 +1,58 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    color: rgb(204, 204, 204);
+    background-color: rgb(12, 12, 12);
+}
+
+#projects {
+    display: flex;
+    width: 50%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: space-around;
+    margin-top: 10%;
+}
+
+.thumbnail {
+    background-color: red;
+    outline: 5px solid black;
+    width: 30%;
+    aspect-ratio: 1/1;
+    margin-bottom: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.project {
+    position: fixed;
+    background: #CCC;
+    outline: 5px solid black;
+    width: 80%;
+    aspect-ratio: 16/9;
+    transition: all 0.75s;
+    flex-direction: column;
+    align-items: center;
+}
+
+#test {
+    background-color: blue;
+}
+
+#test2 {
+    background-color: green;
+}
+
+.close {
+    position: absolute;
+    height: 10%;
+    aspect-ratio: 1/1;
+    right: 0;
+}
