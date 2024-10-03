@@ -54,7 +54,7 @@ body {
 }
 
 #test2 {
-    background-color: green;
+    background-color: rgb(12, 12, 12);
 }
 
 .close {
@@ -68,6 +68,6 @@ body {
     position: fixed;
     z-index: -1;
     font-size: 3vw;
-    transition: opacity 1s;
+    transition: opacity 2s;
     opacity: 0;
 }
