@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Monaco';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Monaco'), url('Monaco.woff') format('woff');
+}
+
 html {
     height: 100%;
 }
@@ -9,6 +16,7 @@ body {
     color: rgb(22, 198, 12);
     background-color: rgb(12, 12, 12);
     font-family: Kode Mono;
+    /*font-family: Monaco;*/
 }
 
 #main {
@@ -44,18 +52,20 @@ body {
     outline: 5px solid rgb(22, 198, 12);
     width: 80%;
     aspect-ratio: 16/9;
-    transition: all 0.75s;
+    transition: top 0.75s, left 0.75s, width 0.75s, height 0.75s, opacity 1s ease;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(12, 12, 12);
+    opacity: 0;
 }
 
-#test {
+/*#test {
     background-color: rgb(12, 12, 12);
 }
 
 #test2 {
     background-color: rgb(12, 12, 12);
-}
+}*/
 
 .close {
     position: absolute;
@@ -64,10 +74,23 @@ body {
     right: 0;
 }
 
+@keyframes makeVisible {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes makeInvisible {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
 .randLetter {
-    position: fixed;
+    position: absolute;
     z-index: -1;
     font-size: 3vw;
     transition: opacity 2s;
     opacity: 0;
+    animation-name: makeVisible;
+    animation-duration: 2s;
+    animation-play-state: paused;
 }
