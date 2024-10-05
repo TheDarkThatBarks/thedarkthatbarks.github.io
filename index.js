@@ -20,13 +20,10 @@ const showProject = async function(thumbnail, projectId) {
         return;
     }
     const project = document.querySelector(`#${thumbnail.id.slice(0, thumbnail.id.indexOf("-"))}`);
-    if (currentProject == project) {
-        closeProject();
-        return;
-    }
     closeProject();
     refresh();
     currentProject = project;
+    thumbnail.dataset.open = "1";
 
     const startBox = thumbnail.getBoundingClientRect();
     project.style.top = `${startBox.top}px`;
@@ -49,6 +46,7 @@ const closeProject = async function () {
     if (currentProject) {
         const project = currentProject;
         currentProject = null;
+        document.querySelector(`#${project.id}-thumbnail`).dataset.open = "0";
         const startBox = document.querySelector(`#${project.id}-thumbnail`).getBoundingClientRect();
         const oldPos = project.getBoundingClientRect();
         //console.log(project.style.transition);
