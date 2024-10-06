@@ -99,13 +99,37 @@ hr {
 
     flex-direction: column;
     align-items: center;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.project h1 {
+    font-size: 300%;
 }
 
 .close {
     position: absolute;
     height: 10%;
     aspect-ratio: 1/1;
-    right: 0;
+    right: -5px;
+    top: -5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--background);
+    color: var(--outline);
+    border-width: 5px;
+    border-color: var(--outline);
+}
+
+.close p {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
 @keyframes makeVisible {

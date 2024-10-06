@@ -10,6 +10,12 @@ const refresh = function () {
     body = document.body.getBoundingClientRect();
     projectWidth = widthPercent * body.width;
     projectHeight = heightPercent * body.width;
+    const button = currentProject.querySelector(".close");
+    button.style.fontSize = `${projectHeight * 0.1}px`;
+    console.log(button.style.fontSize);
+    //button.style.lineHeight = `${projectHeight * 0.1}px`;
+    //console.log(getComputedStyle(button).lineHeight);
+    //console.log(getComputedStyle(button).verticalAlign);
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
@@ -20,8 +26,8 @@ const showProject = function(thumbnail) {
         return;
     }
     const project = document.querySelector(`#${thumbnail.id.slice(0, thumbnail.id.indexOf("-"))}`);
-    refresh();
     currentProject = project;
+    refresh();
     thumbnail.dataset.open = "1";
 
     const startBox = thumbnail.getBoundingClientRect();
@@ -38,6 +44,7 @@ const showProject = function(thumbnail) {
         project.style.width = `${projectWidth}px`;
         project.style.height = `${projectHeight}px`;
         project.style.opacity = "1";
+        project.style.backgroundSize = "100% 100%";
     });
 };
 
@@ -58,6 +65,7 @@ const closeProject = function () {
             project.style.width = `${thumbnail.width}px`;
             project.style.height = `${thumbnail.height}px`
             project.style.opacity = "0";
+            project.style.backgroundSize = "100% 100%";
             setTimeout(() => {
                 project.style.display = "none";
                 project.style.position = "fixed";
