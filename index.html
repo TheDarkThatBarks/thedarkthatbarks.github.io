@@ -32,18 +32,16 @@
             <p>Description here</p>
         <h1>Games</h1>
         <div id="projects">
-            <div class="thumbnail-container" style="display: flex; flex-direction: column; align-items: center;">
-                <h2 style="margin: 0">Cozy Coast</h2>
-                <hr style="border: none; width: 100%; height: 2%; background-color: rgb(22, 198, 12); margin-bottom: 0; margin-top: 1%">
-                <div class="thumbnail" id="test-thumbnail" onclick="showProject(this)" style="background-image: url('Images/CozyCoast.png');">
-                    <!--<img class="thumbnail" id="test-thumbnail" onclick="showProject(this)" src="Images/CozyCoast.png">-->
-                </div>
+            <div class="thumbnail-container">
+                <h2>Cozy Coast</h2>
+                <hr>
+                <div class="thumbnail" id="CozyCoast-thumbnail" onclick="showProject(this)" style="background-image: url('Images/CozyCoast.png');"></div>
             </div>
             <div class="thumbnail-container" id="test2-thumbnail" onclick="showProject(this)"></div>
             <div class="thumbnail-container"></div>
             <div class="thumbnail-container"></div>
         </div>
-        <div class="project" id="test" style="font-family: Merienda;" hidden>
+        <div class="project" id="CozyCoast" style="font-family: Merienda;" hidden>
             <h1>Cozy Coast</h1>
             <p>Test</p>
             <button onclick="window.open('https:\/\/github.com/TheDarkThatBarks/CozyCoast/releases/download/beta/CozyCoast-Beta.zip')">Download</button>
@@ -53,8 +51,6 @@
             <button class="close" onclick="closeProject()">X</button>
         </div>
     </div>
-    <div id="rand">
-
-    </div>
+    <div id="background"></div>
 </body>
 </html>

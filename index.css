@@ -5,51 +5,46 @@
     src: local('Monaco'), url('Monaco.woff') format('woff');
 }
 
+@property --background {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: rgb(12, 12, 12);
+}
+
+@property --outline {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: rgb(22, 198, 12);
+}
+
 html {
     height: 100%;
 }
 
 body {
     height: 100%;
-    /*margin: 0;*/
-    /*color: rgb(204, 204, 204);*/
-    color: rgb(22, 198, 12);
-    background-color: rgb(12, 12, 12);
+    color: var(--outline);
+    background-color: var(--background);
     font-family: Kode Mono;
     /*font-family: Monaco;*/
 }
 
 #main {
+    margin: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*height: 100%;*/
-    margin: 0;
 }
 
 #projects {
-    display: flex;
     width: 100%;
+    margin-top: 5%;
+
+    display: flex;
     flex-flow: row wrap;
-    /*justify-content: space-between;*/
     align-content: space-around;
     justify-content: center;
-    margin-top: 5%;
-}
-
-.thumbnail {
-    /*background-color: red;
-    outline: 5px solid black;*/
-    width: 100%;
-    height: 100%;
-    /*margin-bottom: 10%;
-    margin-left: 10%;
-    margin-right: 10%;*/
-    transition: box-shadow 0.4s;
-}
-
-.thumbnail:not([data-open="1"]):hover {
-    box-shadow: 0 0 50px rgba(0,0,0,0.9) inset;
 }
 
 .thumbnail-container {
@@ -58,32 +53,53 @@ body {
     margin-bottom: 5%;
     margin-left: 5%;
     margin-right: 5%;
-    /*background-color: red;
-    outline: 5px solid black;*/
-    outline: 5px solid rgb(22, 198, 12);
-    background-color: rgb(12, 12, 12);
+    background-color: var(--background);
+    outline: 5px solid var(--outline);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    transition: box-shadow 0.4s;
+    
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.thumbnail:not([data-open="1"]):hover {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.9) inset;
+}
+
+hr {
+    border: none;
+    width: 100%;
+    height: 2%;
+    margin-top: 1%;
+    margin-bottom: 0;
+    background-color: var(--outline);
+}
+
+.thumbnail-container h2 {
+    margin: 0;
 }
 
 .project {
-    position: fixed;
-    background: #CCC;
     width: 80%;
     aspect-ratio: 16/9;
-    transition: top 0.75s, left 0.75s, width 0.75s, height 0.75s, opacity 1s cubic-bezier(.17,.67,.25,1.01);
+    position: fixed;
+    background: #CCC;
+    transition: all 0.75s, opacity 1s cubic-bezier(.17,.67,.25,1.01);
+    background-color: var(--background);
+    outline: 5px solid var(--outline);
+    opacity: 0;
+
     flex-direction: column;
     align-items: center;
-    outline: 5px solid rgb(22, 198, 12);
-    background-color: rgb(12, 12, 12);
-    opacity: 0;
 }
-
-/*#test {
-    background-color: rgb(12, 12, 12);
-}
-
-#test2 {
-    background-color: rgb(12, 12, 12);
-}*/
 
 .close {
     position: absolute;
@@ -106,8 +122,8 @@ body {
     position: absolute;
     z-index: -1;
     font-size: 3vw;
-    transition: opacity 2s;
     opacity: 0;
+
     animation-name: makeVisible;
     animation-duration: 2s;
     animation-play-state: paused;
