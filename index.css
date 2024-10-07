@@ -87,6 +87,10 @@ hr {
     margin: 0;
 }
 
+.thumbnail.cozycoast {
+    background-image: url(Images/CozyCoast.png);
+}
+
 .project {
     width: 80%;
     aspect-ratio: 16/9;
@@ -130,6 +134,12 @@ hr {
     padding: 0;
     height: 100%;
     width: 100%;
+}
+
+#cozycoast {
+    font-family: Merienda;
+    color: rgb(198, 146, 91);
+    background-image: url('Images/CozyCoastBackground.png')
 }
 
 @keyframes makeVisible {

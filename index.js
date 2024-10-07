@@ -11,21 +11,20 @@ const refresh = function () {
     projectWidth = widthPercent * body.width;
     projectHeight = heightPercent * body.width;
     const button = currentProject.querySelector(".close");
-    button.style.fontSize = `${projectHeight * 0.1}px`;
+    button.style.fontSize = `${projectHeight * 0.1 * 0.8}px`;
     console.log(button.style.fontSize);
-    //button.style.lineHeight = `${projectHeight * 0.1}px`;
-    //console.log(getComputedStyle(button).lineHeight);
-    //console.log(getComputedStyle(button).verticalAlign);
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
 
 const showProject = function(thumbnail) {
+    console.log(currentProject);
     if (currentProject) {
+        console.log("DEBUG");
         closeProject();
         return;
     }
-    const project = document.querySelector(`#${thumbnail.id.slice(0, thumbnail.id.indexOf("-"))}`);
+    const project = document.querySelector(`#${thumbnail.classList[0]}`);
     currentProject = project;
     refresh();
     thumbnail.dataset.open = "1";
@@ -45,37 +44,38 @@ const showProject = function(thumbnail) {
         project.style.height = `${projectHeight}px`;
         project.style.opacity = "1";
         project.style.backgroundSize = "100% 100%";
-    });
+    }, 1);
 };
 
 const closeProject = function () {
     if (currentProject) {
         const project = currentProject;
         currentProject = null;
-        document.querySelector(`#${project.id}-thumbnail`).dataset.open = "0";
+        const thumbnail = document.querySelector(`.${project.id}.thumbnail`);
+        thumbnail.dataset.open = "0";
         const transition = getComputedStyle(project).transition;
         project.style.transition = "none";
         project.style.top = `${project.getBoundingClientRect().top + window.scrollY}px`;
         project.style.position = "absolute";
         setTimeout(() => {
             project.style.transition = transition;
-            const thumbnail = document.querySelector(`#${project.id}-thumbnail`).getBoundingClientRect();
-            project.style.top = `${thumbnail.top + window.scrollY}px`;
-            project.style.left = `${thumbnail.left}px`;
-            project.style.width = `${thumbnail.width}px`;
-            project.style.height = `${thumbnail.height}px`
+            const box = thumbnail.getBoundingClientRect();
+            project.style.top = `${box.top + window.scrollY}px`;
+            project.style.left = `${box.left}px`;
+            project.style.width = `${box.width}px`;
+            project.style.height = `${box.height}px`
             project.style.opacity = "0";
             project.style.backgroundSize = "100% 100%";
             setTimeout(() => {
                 project.style.display = "none";
                 project.style.position = "fixed";
             }, 750);
-        });
+        }, 1);
     }
 };
 
 document.addEventListener("click", function (event) {
-    if (currentProject && event.target.id.slice(0, event.target.id.indexOf("-")) != currentProject.id && event.target.className != "project" && !currentProject.contains(event.target))
+    if (currentProject && event.target.classList[0] != currentProject.id && event.target.className != "project" && !currentProject.contains(event.target))
         closeProject(currentProject);
 });
 
