@@ -1,16 +1,21 @@
 let body, projectWidth, projectHeight;
 const aspectRatio = 16/9;
-const widthPercent = 0.6;
+const widthPercent = 0.7;
 const heightPercent = widthPercent / aspectRatio;
 
 let currentProject = null;
 let projectClosing = false;
 
+let navHeight = null;
+
 const refresh = function () {
     body = document.body.getBoundingClientRect();
-    projectWidth = widthPercent * body.width;
-    projectHeight = heightPercent * body.width;
+    //projectWidth = widthPercent * body.width;
+    projectWidth = widthPercent * window.visualViewport.width;
+    //projectHeight = heightPercent * body.width;
+    projectHeight = heightPercent * window.visualViewport.width;
     const button = currentProject.querySelector(".close");
+    console.log(currentProject);
     button.style.fontSize = `${projectHeight * 0.1 * 0.8}px`;
     console.log(button.style.fontSize);
 };
@@ -18,7 +23,6 @@ const refresh = function () {
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
 
 const showProject = function(thumbnail) {
-    console.log(currentProject);
     if (currentProject) {
         console.log("DEBUG");
         closeProject();
@@ -33,8 +37,9 @@ const showProject = function(thumbnail) {
     project.style.top = `${startBox.top}px`;
     project.style.left = `${startBox.left}px`;
     project.style.width = `${startBox.width}px`;
-    project.style.height = `${startBox.height}px`
-
+    project.style.height = `${startBox.height}px`;
+    project.style.fontSize = "5px";
+    project.style.lineHeight = "1.2";
     project.style.display = "flex";
     project.hidden = false;
     setTimeout(() => {
@@ -44,6 +49,8 @@ const showProject = function(thumbnail) {
         project.style.height = `${projectHeight}px`;
         project.style.opacity = "1";
         project.style.backgroundSize = "100% 100%";
+        project.style.fontSize = "16px";
+        project.style.lineHeight = "1.2";
     }, 1);
 };
 
@@ -66,10 +73,14 @@ const closeProject = function () {
             project.style.height = `${box.height}px`
             project.style.opacity = "0";
             project.style.backgroundSize = "100% 100%";
+            project.style.fontSize = "5px";
+            project.style.lineHeight = "1.2";
             setTimeout(() => {
                 project.style.display = "none";
                 project.style.position = "fixed";
-            }, 750);
+            }, Math.max(...getComputedStyle(project).transitionDuration.split(" ").map((d) => {
+                return Number(d.split("s")[0]);
+            })) * 1000);
         }, 1);
     }
 };
@@ -98,8 +109,40 @@ const backgroundAnimation = function () {
 const removeChar = function (element) {
     element.style.animationName = "makeInvisible";
     element.style.animationPlayState = "running";
-    element.style.opacity = "0";
-    element.addEventListener("animationend", (event) => {
+    setTimeout(() => {
         element.remove();
+    }, 2000);
+    element.style.opacity = "0";
+};
+
+document.addEventListener("scroll", (event) => {
+    const nav = document.querySelector("#hidden-nav");
+    if (window.scrollY > navHeight)
+        nav.style.visibility = "visible";
+    if (window.scrollY <= navHeight)
+        nav.style.visibility = "hidden";
+});
+
+const load = function () {
+    const nav = document.querySelector("#hidden-nav");
+    navHeight = document.querySelector("nav").getBoundingClientRect().top - parseFloat(getComputedStyle(nav).paddingTop) + window.scrollY;
+    document.querySelectorAll(".anchor").forEach((element) => {
+        element.style.scrollMarginTop = `${nav.getBoundingClientRect().height}px`;
     });
+    backgroundAnimation();
+};
+
+window.visualViewport.addEventListener("resize", (event) => {
+    if (currentProject)
+        resizeProject();
+});
+
+const resizeProject = function() {
+    refresh();
+    setTimeout(() => {
+        currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2}px`;
+        currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2}px`;
+        currentProject.style.width = `${projectWidth}px`;
+        currentProject.style.height = `${projectHeight}px`;
+    }, 1);
 };

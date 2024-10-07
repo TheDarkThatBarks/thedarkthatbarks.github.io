@@ -13,7 +13,7 @@
     <title>Ellys Gorodisch</title>
     <script src="index.js"></script>
 </head>
-<body onload="backgroundAnimation()">
+<body onload="load()">
     <div id="main">
         <!--<pre style="text-wrap: nowrap">
            ▄████████  ▄█        ▄█       ▄██   ▄      ▄████████         ▄██████▄   ▄██████▄     ▄████████  ▄██████▄  ████████▄   ▄█     ▄████████  ▄████████    ▄█    █▄ 
@@ -28,9 +28,23 @@
         </pre>-->
         <img src="Images/Title.png" style="width: 80%; padding-top: 1%">
         <h2>(Ellys Gorodisch)</h2>
-        <h1>About Me</h1>
+        <nav id="nav">
+            <a href="#">Home</a>
+            <a href="#aboutme">About Me</a>
+            <a href="#games">Games</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <nav id="hidden-nav">
+            <a href="#">Home</a>
+            <a href="#aboutme">About Me</a>
+            <a href="#games">Games</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <h1 class="anchor" id="aboutme">About Me</h1>
             <p>Description here</p>
-        <h1>Games</h1>
+        <h1 class="anchor" id="games">Games</h1>
         <div id="projects">
             <div class="thumbnail-container">
                 <h2>Cozy Coast</h2>
@@ -40,11 +54,16 @@
             <div class="thumbnail-container" id="test2-thumbnail" onclick="showProject(this)"></div>
             <div class="thumbnail-container"></div>
             <div class="thumbnail-container"></div>
+            <div class="thumbnail-container"></div>
+            <div class="thumbnail-container"></div>
+            <div class="thumbnail-container"></div>
+            <div class="thumbnail-container"></div>
+            <div class="thumbnail-container"></div>
         </div>
         <div class="project" id="cozycoast" hidden>
             <h1>Cozy Coast</h1>
-            <div style="background-color: rgba(0, 0, 0, 0.6); width: 50%; height: 50%; text-align: center;">
-                <p>Test</p>
+            <h2 id="test" onclick="window.open('https:\/\/sites.google.com/view/cozy-coast/')">Website</h2>
+            <div class="textbox">
                 <p>A young falconer decides to go visit their grandfather, who happens to be the only fisherman in a little rundown coastal town. Upon arrival, their grandfather asks them to help out with meeting the fishing quota through falconry. Along the way, the falconer learns about the history of the town and the people who live in it.</p>
                 <p>Players will get to explore the town and interact with townsfolk as the falconer. They will also catch fish and find trinkets as a falcon.</p>
             </div>
