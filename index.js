@@ -1,7 +1,7 @@
 let body, projectWidth, projectHeight;
-const aspectRatio = 16/9;
-const widthPercent = 0.7;
-const heightPercent = widthPercent / aspectRatio;
+const aspectRatio = 20/9;
+const widthPercent = 0.8;
+const heightPercent = 0.9;
 
 let currentProject = null;
 let projectClosing = false;
@@ -13,11 +13,12 @@ const refresh = function () {
     //projectWidth = widthPercent * body.width;
     projectWidth = widthPercent * window.visualViewport.width;
     //projectHeight = heightPercent * body.width;
-    projectHeight = heightPercent * window.visualViewport.width;
+    projectHeight = heightPercent * window.visualViewport.height;
     const button = currentProject.querySelector(".close");
-    console.log(currentProject);
-    button.style.fontSize = `${projectHeight * 0.1 * 0.8}px`;
-    console.log(button.style.fontSize);
+    button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
+    //console.log(button.style.fontSize);
+    currentProject.querySelector(".details-container").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.4 / 3}px)`;
+    console.log(getComputedStyle(currentProject.querySelector(".details-container")).gridTemplateRows);
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
@@ -43,8 +44,8 @@ const showProject = function(thumbnail) {
     project.style.display = "flex";
     project.hidden = false;
     setTimeout(() => {
-        project.style.top = `${0.5 * body.height - projectHeight / 2}px`;
-        project.style.left = `${0.5 * body.width - projectWidth / 2}px`;
+        project.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
+        project.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
         project.style.width = `${projectWidth}px`;
         project.style.height = `${projectHeight}px`;
         project.style.opacity = "1";
@@ -52,6 +53,8 @@ const showProject = function(thumbnail) {
         project.style.fontSize = "16px";
         project.style.lineHeight = "1.2";
     }, 1);
+    document.querySelector("#back").style.zIndex = "2";
+    document.querySelector("#back").style.opacity = "0.6";
 };
 
 const closeProject = function () {
@@ -75,6 +78,10 @@ const closeProject = function () {
             project.style.backgroundSize = "100% 100%";
             project.style.fontSize = "5px";
             project.style.lineHeight = "1.2";
+            document.querySelector("#back").style.opacity = "0";
+            setTimeout(() => {
+                document.querySelector("#back").style.zIndex = "-2";
+            }, 500);
             setTimeout(() => {
                 project.style.display = "none";
                 project.style.position = "fixed";
@@ -127,7 +134,7 @@ const load = function () {
     const nav = document.querySelector("#hidden-nav");
     navHeight = document.querySelector("nav").getBoundingClientRect().top - parseFloat(getComputedStyle(nav).paddingTop) + window.scrollY;
     document.querySelectorAll(".anchor").forEach((element) => {
-        element.style.scrollMarginTop = `${nav.getBoundingClientRect().height}px`;
+        element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 10}px`;
     });
     backgroundAnimation();
 };
@@ -139,10 +146,20 @@ window.visualViewport.addEventListener("resize", (event) => {
 
 const resizeProject = function() {
     refresh();
-    setTimeout(() => {
-        currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2}px`;
-        currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2}px`;
+    //setTimeout(() => {
+        currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
+        currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
         currentProject.style.width = `${projectWidth}px`;
         currentProject.style.height = `${projectHeight}px`;
-    }, 1);
+    //}, 1);
+};
+
+const revealDetails = function (details) {
+    if (details.dataset.open == "1") {
+        details.style.height = "0";
+        details.dataset.open = "0";
+    } else {
+        details.style.height = "40%";
+        details.dataset.open = "1";
+    }
 };
