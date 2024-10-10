@@ -104,10 +104,14 @@ hr {
     background-color: var(--background);
     outline: 5px solid var(--outline);
     opacity: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    overflow-y: clip;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
 
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    /*justify-content: ;*/
 
     background-position: center center;
     background-repeat: no-repeat;
@@ -164,9 +168,12 @@ hr {
 }
 
 #cozycoast {
+    background-image: url('Images/CozyCoastBackground.png')
+}
+
+#cozycoast * {
     font-family: Merienda;
     color: rgb(198, 146, 91);
-    background-image: url('Images/CozyCoastBackground.png')
 }
 
 @keyframes makeVisible {

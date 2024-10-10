@@ -78,6 +78,7 @@ const closeProject = function () {
             project.style.backgroundSize = "100% 100%";
             project.style.fontSize = "5px";
             project.style.lineHeight = "1.2";
+            project.scrollTop = 0;
             document.querySelector("#back").style.opacity = "0";
             setTimeout(() => {
                 document.querySelector("#back").style.zIndex = "-2";
@@ -163,3 +164,8 @@ const revealDetails = function (details) {
         details.dataset.open = "1";
     }
 };
+
+const test = function () {
+    //document.querySelector("#cozycoast").scrollTo(document.querySelector("#cozycoast-2"));
+    document.querySelector("#cozycoast").scroll(0, projectHeight);
+}
