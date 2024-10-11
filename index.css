@@ -39,6 +39,37 @@ body {
     height: 100%;
 }
 
+nav {
+    text-align: center;
+    font-size: 150%;
+}
+
+nav a {
+    padding: 5px;
+    border: 2px solid var(--outline);
+    text-decoration: none;
+    color: var(--outline);
+    background-color: var(--background);
+}
+
+#hidden-nav {
+    visibility: hidden;
+    position: fixed;
+    width: auto;
+    top: 0;
+    background-color: var(--background);
+    padding: 30px 30px;
+    z-index: 1;
+    transition: border 0.5s;
+    border: 2px solid rgb(from var(--outline) r g b / 0);
+    border-width: 0px 2px 2px 2px;
+}
+
+#hidden-nav[style*="visibility: visible"] {
+    border: 2px solid rgb(from var(--outline) r g b / 1);
+    border-width: 0px 2px 2px 2px;
+}
+
 #projects {
     width: 100%;
     margin-top: 5%;
@@ -92,10 +123,10 @@ hr {
 }
 
 .thumbnail.cozycoast {
-    background-image: url(Images/CozyCoast.png);
+    background-image: url(Images/CozyCoast/Logo.png);
 }
 
-.project {
+div.project {
     width: 80%;
     aspect-ratio: 16/9;
     position: fixed;
@@ -104,41 +135,37 @@ hr {
     background-color: var(--background);
     outline: 5px solid var(--outline);
     opacity: 0;
-    /*overflow: hidden;*/
+
     overflow-y: clip;
     overflow-x: hidden;
     scrollbar-width: thin;
     scroll-behavior: smooth;
 
     flex-direction: column;
-    /*justify-content: ;*/
 
     background-position: center center;
     background-repeat: no-repeat;
     z-index: 10;
 }
 
-.project h1 {
-    font-size: 300%;
-    margin-bottom: 10px;
-}
-
-.textbox {
-    background-color: rgba(0, 0, 0, 0.6);
+img.project {
     width: 100%;
+}
+
+[class^="column"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    text-align: center;
-    text-wrap: pretty;
-    overflow: auto;
-    scrollbar-width: none;
 }
 
-.textbox:hover {
-    overflow: auto;
+.column-small {
+    width: 25%;
 }
 
-.textbox > * {
-    padding: 10px 10px;
+.column-big {
+    width: 50%;
 }
 
 .close {
@@ -167,13 +194,102 @@ hr {
     width: 100%;
 }
 
-#cozycoast {
-    background-image: url('Images/CozyCoastBackground.png')
+.project h1 {
+    font-size: 300%;
+    margin-bottom: 10px;
+
+    text-shadow: 1px 1px 1px black;
+    margin-top: 10px;
 }
 
-#cozycoast * {
+.details-container {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.4s ease-out;
+
+    display: grid;
+    /*grid-template: 100px 100px 100px / 1fr 1fr;*/
+    grid-template-columns: 1fr 1fr;
+    vertical-align: start;
+}
+
+.textbox {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    text-wrap: pretty;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.textbox:hover {
+    overflow: auto;
+}
+
+.textbox > * {
+    padding: 10px 10px;
+}
+
+.button {
+    cursor: pointer;
+    background-color:rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    box-shadow: 5px 5px 5px black;
+    border-radius: 15px;
+    transition: background-color 0.2s, outline 0.1s, box-shadow 0.2s;
+}
+
+.button:hover {
+    filter: brightness(120%);
+}
+
+.button:active {
+    box-shadow: inset 2px 2px 5px black;
+}
+
+div.page {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button.page {
+    height: 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button.page h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.button.page img {
+    height: 60%;
+    aspect-ratio: 1/1;
+}
+
+#cozycoast {
+    background-image: url('Images/CozyCoast/Background.png')
+}
+
+#cozycoast *:not(.close) {
     font-family: Merienda;
     color: rgb(198, 146, 91);
+}
+
+#back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background);
+    opacity: 0;
+    z-index: -2;
+    transition: opacity 0.5s;
 }
 
 @keyframes makeVisible {
@@ -195,86 +311,4 @@ hr {
     animation-name: makeVisible;
     animation-duration: 2s;
     animation-play-state: paused;
-}
-
-#test {
-    cursor: pointer;
-    background-color:rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    box-shadow: 5px 5px 5px black;
-    border-radius: 15px;
-    transition: background-color 0.2s, outline 0.1s, box-shadow 0.2s;
-}
-
-#test:hover {
-    filter: brightness(120%);
-}
-
-#test:active {
-    /*background-color: rgba(0, 0, 0, 0.9);
-    outline: 2px solid rgb(198, 146, 91);*/
-    box-shadow: inset 2px 2px 5px black;
-}
-
-nav {
-    text-align: center;
-    font-size: 150%;
-}
-
-#hidden-nav {
-    visibility: hidden;
-    position: fixed;
-    width: auto;
-    top: 0;
-    background-color: var(--background);
-    padding: 30px 30px;
-    z-index: 1;
-    transition: border 0.5s;
-    border: 2px solid rgb(from var(--outline) r g b / 0);
-    border-width: 0px 2px 2px 2px;
-}
-
-#hidden-nav[style*="visibility: visible"] {
-    border: 2px solid rgb(from var(--outline) r g b / 1);
-    border-width: 0px 2px 2px 2px;
-}
-
-nav a {
-    padding: 5px;
-    border: 2px solid var(--outline);
-    text-decoration: none;
-    color: var(--outline);
-    background-color: var(--background);
-}
-
-#back {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: var(--background);
-    opacity: 0;
-    z-index: -2;
-    transition: opacity 0.5s;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /*width: 33%;*/
-    height: 100%;
-}
-
-.details-container {
-    overflow: hidden;
-    height: 0;
-    transition: height 0.4s ease-out;
-
-    display: grid;
-    /*grid-template: 100px 100px 100px / 1fr 1fr;*/
-    grid-template-columns: 1fr 1fr;
-    vertical-align: start;
 }

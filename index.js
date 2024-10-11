@@ -10,14 +10,11 @@ let navHeight = null;
 
 const refresh = function () {
     body = document.body.getBoundingClientRect();
-    //projectWidth = widthPercent * body.width;
     projectWidth = widthPercent * window.visualViewport.width;
-    //projectHeight = heightPercent * body.width;
     projectHeight = heightPercent * window.visualViewport.height;
     const button = currentProject.querySelector(".close");
     button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
-    //console.log(button.style.fontSize);
-    currentProject.querySelector(".details-container").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.4 / 3}px)`;
+    currentProject.querySelector(".details-container").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
     console.log(getComputedStyle(currentProject.querySelector(".details-container")).gridTemplateRows);
 };
 
@@ -46,8 +43,10 @@ const showProject = function(thumbnail) {
     setTimeout(() => {
         project.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
         project.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
-        project.style.width = `${projectWidth}px`;
-        project.style.height = `${projectHeight}px`;
+        //project.style.width = `${projectWidth}px`;
+        project.style.width = "80vw";
+        //project.style.height = `${projectHeight}px`;
+        project.style.height = "90vh";
         project.style.opacity = "1";
         project.style.backgroundSize = "100% 100%";
         project.style.fontSize = "16px";
@@ -140,19 +139,17 @@ const load = function () {
     backgroundAnimation();
 };
 
-window.visualViewport.addEventListener("resize", (event) => {
+/*window.visualViewport.addEventListener("resize", (event) => {
     if (currentProject)
         resizeProject();
-});
+});*/
 
 const resizeProject = function() {
     refresh();
-    //setTimeout(() => {
-        currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
-        currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
-        currentProject.style.width = `${projectWidth}px`;
-        currentProject.style.height = `${projectHeight}px`;
-    //}, 1);
+    currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
+    currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
+    currentProject.style.width = `${projectWidth}px`;
+    currentProject.style.height = `${projectHeight}px`;
 };
 
 const revealDetails = function (details) {
@@ -165,7 +162,8 @@ const revealDetails = function (details) {
     }
 };
 
-const test = function () {
-    //document.querySelector("#cozycoast").scrollTo(document.querySelector("#cozycoast-2"));
-    document.querySelector("#cozycoast").scroll(0, projectHeight);
-}
+const changePage = function (button) {
+    const pages = Array.from(currentProject.querySelectorAll("div.page"));
+    const page = pages.indexOf(button.closest("div.page")) + (button.dataset.dir === "down" ? 1 : -1);
+    currentProject.scrollTo(0, pages[page].getBoundingClientRect().top);
+};
