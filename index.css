@@ -205,12 +205,17 @@ img.project {
 .details-container {
     overflow: hidden;
     height: 0;
+    background-color: rgb(0 0 0 / 0.6);
     transition: height 0.4s ease-out;
 
     display: grid;
     /*grid-template: 100px 100px 100px / 1fr 1fr;*/
     grid-template-columns: 1fr 1fr;
-    vertical-align: start;
+    vertical-align: flex-start;
+}
+
+.button.details {
+    margin-bottom: 0;
 }
 
 .textbox {
@@ -227,7 +232,7 @@ img.project {
     overflow: auto;
 }
 
-.textbox > * {
+.textbox > p {
     padding: 10px 10px;
 }
 

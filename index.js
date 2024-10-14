@@ -157,7 +157,7 @@ const revealDetails = function (details) {
         details.style.height = "0";
         details.dataset.open = "0";
     } else {
-        details.style.height = "40%";
+        details.style.height = "35%";
         details.dataset.open = "1";
     }
 };
