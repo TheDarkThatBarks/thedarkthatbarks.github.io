@@ -15,7 +15,12 @@ const refresh = function () {
     const button = currentProject.querySelector(".close");
     button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
     currentProject.querySelector(".details-container").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
-    console.log(getComputedStyle(currentProject.querySelector(".details-container")).gridTemplateRows);
+    //console.log(getComputedStyle(currentProject.querySelector(".details-container")).gridTemplateRows);
+    const details = currentProject.querySelector(".details-container-container");
+    ///console.log(details.querySelector(".button.details"));
+    //details.style.height = details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-container").getBoundingClientRect().height}px`;
+    details.style.height = "48.8px";
+    details.dataset.open = "0";
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
@@ -139,26 +144,23 @@ const load = function () {
     backgroundAnimation();
 };
 
-/*window.visualViewport.addEventListener("resize", (event) => {
-    if (currentProject)
-        resizeProject();
-});*/
-
-const resizeProject = function() {
+/*const resizeProject = function() {
     refresh();
     currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
     currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
     currentProject.style.width = `${projectWidth}px`;
     currentProject.style.height = `${projectHeight}px`;
-};
+};*/
 
 const revealDetails = function (details) {
     if (details.dataset.open == "1") {
-        details.style.height = "0";
+        details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height}px`;
         details.dataset.open = "0";
+        details.querySelector(".arrow").style.transform = "rotate(0)";
     } else {
-        details.style.height = "35%";
+        details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-container").getBoundingClientRect().height}px`;
         details.dataset.open = "1";
+        details.querySelector(".arrow").style.transform = "rotate(90deg)";
     }
 };
 

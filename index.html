@@ -65,31 +65,36 @@
             <div class="page">
                 <div class="column-small">
                     <div class="textbox">
-                        <h2 class="button details" onclick="revealDetails(this.nextElementSibling)">Project Details</h2>
-                        <div class="details-container">
-                            <div class="details">
-                                <h3>Role</h3>
-                                <p>Lead Programmer</p>
-                            </div>
-                            <div class="details">
-                                <h3>Software</h3>
-                                <p>Unreal 5, Git</p>
-                            </div>
-                            <div class="details">
-                                <h3>Development Time</h3>
-                                <p>7 weeks</p>
-                            </div>
-                            <div class="details">
-                                <h3>Language</h3>
-                                <p>Blueprints</p>
-                            </div>
-                            <div class="details">
-                                <h3>Team Size</h3>
-                                <p>7</p>
-                            </div>
-                            <div class="details">
-                                <h3>Release Date</h3>
-                                <p>May 2024</p>
+                        <div class="details-container-container">
+                            <h2 class="button details" onclick="revealDetails(this.parentElement)">
+                                <div class="arrow"></div>
+                                Project Details
+                            </h2>
+                            <div class="details-container">
+                                <div class="details">
+                                    <h3>Role</h3>
+                                    <p>Lead Programmer</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Software</h3>
+                                    <p>Unreal 5, Git</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Development Time</h3>
+                                    <p>7 weeks</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Language</h3>
+                                    <p>Blueprints</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Team Size</h3>
+                                    <p>7</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Release Date</h3>
+                                    <p>May 2024</p>
+                                </div>
                             </div>
                         </div>
                         <p>A young falconer decides to go visit their grandfather, who happens to be the only fisherman in a little rundown coastal town. Upon arrival, their grandfather asks them to help out with meeting the fishing quota through falconry. Along the way, the falconer learns about the history of the town and the people who live in it.</p>
@@ -119,7 +124,7 @@
 
             <div class="page">
                 <button class="button page" onclick="changePage(this)" data-dir="up">
-                    <h2>Technical Overview</h2>
+                    <h2>Overview</h2>
                     <img src="Images/Down Arrow.png" style="transform: rotate(180deg);">
                 </button>
             </div>
