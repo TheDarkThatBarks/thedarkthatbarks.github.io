@@ -151,6 +151,10 @@ hr {
     background-image: url(Images/YourMusicIsTrash/Logo.png);
 }
 
+.thumbnail.hackerman {
+    background-image: url(Images/HackerMan/Logo.png);
+}
+
 div.project {
     width: 80%;
     aspect-ratio: 16/9;
@@ -240,8 +244,6 @@ img.project {
     margin-top: 15px;
     height: auto;
     transition: height 0.4s ease-out;
-    /*box-shadow: 5px 5px 5px black;*/
-    /*margin-right: 1%;*/
 }
 
 #cozycoast .details-container {
@@ -363,7 +365,12 @@ div.page {
 
 #yourmusicistrash *:not(.close) {
     font-family: Typewriter;
-    color: rgb(255, 255, 0);
+    color: var(--yourmusicistrash);
+}
+
+#hackerman *:not(.close) {
+    font-family: Kode Mono;
+    color: rgb(204, 204, 204);
 }
 
 .contact {

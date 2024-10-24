@@ -14,13 +14,10 @@ const refresh = function () {
     projectHeight = heightPercent * window.visualViewport.height;
     const button = currentProject.querySelector(".close");
     button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
-    currentProject.querySelector(".details-table").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
+    const details = currentProject.querySelector(".details-table")
+    if (details)
+        details.style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
     //console.log(getComputedStyle(currentProject.querySelector(".details-table")).gridTemplateRows);
-    const details = currentProject.querySelector(".details-container");
-    ///console.log(details.querySelector(".button.details"));
-    //details.style.height = details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-table").getBoundingClientRect().height}px`;
-    //details.style.height = "48.8px";
-    details.dataset.open = "1";
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
