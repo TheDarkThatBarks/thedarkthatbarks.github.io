@@ -2,7 +2,12 @@
     font-family: 'Monaco';
     font-style: normal;
     font-weight: normal;
-    src: local('Monaco'), url('Monaco.woff') format('woff');
+    src: local('Monaco'), url('Fonts/Monaco.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Typewriter';
+    src: url('Fonts/df-font.ttf') format('truetype');
 }
 
 @property --background {
@@ -17,9 +22,22 @@
     initial-value: rgb(22, 198, 12);
 }
 
+@property --cozycoast {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: rgb(198, 146, 91);
+}
+
+@property --yourmusicistrash {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: rgb(255, 255, 0);
+}
+
 html {
     height: 100%;
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
 body {
@@ -28,6 +46,7 @@ body {
     background-color: var(--background);
     font-family: Kode Mono;
     /*font-family: Monaco;*/
+    overflow-x: hidden;
 }
 
 #main {
@@ -46,7 +65,7 @@ nav {
 
 nav a {
     padding: 5px;
-    border: 2px solid var(--outline);
+    border: 3px solid var(--outline);
     text-decoration: none;
     color: var(--outline);
     background-color: var(--background);
@@ -70,9 +89,9 @@ nav a {
     border-width: 0px 2px 2px 2px;
 }
 
-#projects {
+#project-thumbnails {
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2%;
 
     display: flex;
     flex-flow: row wrap;
@@ -97,16 +116,18 @@ nav a {
 .thumbnail {
     width: 100%;
     height: 100%;
-    transition: box-shadow 0.4s;
+    transition: box-shadow 0.4s, background-size 0.4s;
     
-    background-size: contain;
+    background-size: 100%;
     background-repeat: no-repeat;
+    background-position: center center;
 
     cursor: pointer;
 }
 
 .thumbnail:not([data-open="1"]):hover {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.9) inset;
+    background-size: 110%;
 }
 
 hr {
@@ -124,6 +145,10 @@ hr {
 
 .thumbnail.cozycoast {
     background-image: url(Images/CozyCoast/Logo.png);
+}
+
+.thumbnail.yourmusicistrash {
+    background-image: url(Images/YourMusicIsTrash/Logo.png);
 }
 
 div.project {
@@ -158,6 +183,10 @@ img.project {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.column {
+    width: 33%;
 }
 
 .column-small {
@@ -202,21 +231,36 @@ img.project {
     margin-top: 10px;
 }
 
-.details-container-container {
+.details-container {
     width: 95%;
     overflow: hidden;
     background-color: rgb(0 0 0 / 0.6);
+    border: 1px solid white;
     border-radius: 15px;
     margin-top: 15px;
     height: auto;
     transition: height 0.4s ease-out;
-    box-shadow: 5px 5px 5px black;
-    margin-right: 1%;
+    /*box-shadow: 5px 5px 5px black;*/
+    /*margin-right: 1%;*/
+}
+
+#cozycoast .details-container {
+    border-color: var(--cozycoast);
+}
+
+#yourmusicistrash .details-container {
+    border-color: var(--yourmusicistrash);
 }
 
 .button.details {
     margin-bottom: 0;
     margin-top: 0;
+}
+
+h2.details {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 10px;
 }
 
 .arrow {
@@ -229,7 +273,7 @@ img.project {
     transition: transform 0.4s ease-out;
 }
 
-.details-container {
+.details-table {
     overflow: hidden;
     transition: height 0.4s ease-out;
 
@@ -265,6 +309,7 @@ img.project {
 
 .textbox > p {
     padding: 10px 10px;
+    font-size: 120%;
 }
 
 .button {
@@ -313,7 +358,22 @@ div.page {
 
 #cozycoast *:not(.close) {
     font-family: Merienda;
-    color: rgb(198, 146, 91);
+    color: var(--cozycoast);
+}
+
+#yourmusicistrash *:not(.close) {
+    font-family: Typewriter;
+    color: rgb(255, 255, 0);
+}
+
+.contact {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.contact a {
+    margin: 1%;
 }
 
 #back {
@@ -347,4 +407,5 @@ div.page {
     animation-name: makeVisible;
     animation-duration: 2s;
     animation-play-state: paused;
+    animation-fill-mode: forwards;
 }

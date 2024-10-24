@@ -14,13 +14,13 @@ const refresh = function () {
     projectHeight = heightPercent * window.visualViewport.height;
     const button = currentProject.querySelector(".close");
     button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
-    currentProject.querySelector(".details-container").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
-    //console.log(getComputedStyle(currentProject.querySelector(".details-container")).gridTemplateRows);
-    const details = currentProject.querySelector(".details-container-container");
+    currentProject.querySelector(".details-table").style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
+    //console.log(getComputedStyle(currentProject.querySelector(".details-table")).gridTemplateRows);
+    const details = currentProject.querySelector(".details-container");
     ///console.log(details.querySelector(".button.details"));
-    //details.style.height = details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-container").getBoundingClientRect().height}px`;
-    details.style.height = "48.8px";
-    details.dataset.open = "0";
+    //details.style.height = details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-table").getBoundingClientRect().height}px`;
+    //details.style.height = "48.8px";
+    details.dataset.open = "1";
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
@@ -112,7 +112,7 @@ const backgroundAnimation = function () {
         char.style.left = `${Math.random() * (main.width * 0.8) + main.width * 0.1}px`;
         char.style.top = `${Math.random() * (main.height * 0.9)}px`;
         document.querySelector("#background").appendChild(char);
-        char.style.opacity = "0.6";
+        //char.style.opacity = "0.6";
         char.style.animationPlayState = "running";
         setTimeout(() => removeChar(char), 3000);
     }, 100);
@@ -124,7 +124,7 @@ const removeChar = function (element) {
     setTimeout(() => {
         element.remove();
     }, 2000);
-    element.style.opacity = "0";
+    //element.style.opacity = "0";
 };
 
 document.addEventListener("scroll", (event) => {
@@ -158,7 +158,7 @@ const revealDetails = function (details) {
         details.dataset.open = "0";
         details.querySelector(".arrow").style.transform = "rotate(0)";
     } else {
-        details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-container").getBoundingClientRect().height}px`;
+        details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-table").getBoundingClientRect().height}px`;
         details.dataset.open = "1";
         details.querySelector(".arrow").style.transform = "rotate(90deg)";
     }

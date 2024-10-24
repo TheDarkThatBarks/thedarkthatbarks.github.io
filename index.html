@@ -32,28 +32,34 @@
         <nav id="nav">
             <a href="#">Home</a>
             <a href="#aboutme">About Me</a>
-            <a href="#games">Games</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </nav>
         <nav id="hidden-nav">
             <a href="#">Home</a>
             <a href="#aboutme">About Me</a>
-            <a href="#games">Games</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </nav>
         <h1 class="anchor" id="aboutme">About Me</h1>
             <p>Description here</p>
-        <h1 class="anchor" id="games">Games</h1>
-        <div id="projects">
+        <h1 class="anchor" id="projects">Projects</h1>
+        <div id="project-thumbnails">
             <div class="thumbnail-container">
                 <h2>Cozy Coast</h2>
                 <hr>
                 <div class="cozycoast thumbnail" onclick="showProject(this)"></div>
             </div>
-            <div class="thumbnail-container" id="test2-thumbnail" onclick="showProject(this)"></div>
-            <div class="thumbnail-container"></div>
+            <div class="thumbnail-container">
+                <h2>Your Music is Trash</h2>
+                <hr>
+                <div class="yourmusicistrash thumbnail" onclick="showProject(this)"></div>
+            </div>
+            <div class="thumbnail-container">
+                <h2>Hackerman</h2>
+                <hr>
+                <div class="hackerman thumbnail" onclick="showProject(this)"></div>
+            </div>
             <div class="thumbnail-container"></div>
             <div class="thumbnail-container"></div>
             <div class="thumbnail-container"></div>
@@ -61,16 +67,20 @@
             <div class="thumbnail-container"></div>
             <div class="thumbnail-container"></div>
         </div>
+        <h1 class="anchor" id="contact">Contact</h1>
+        <div class="contact">
+            <a>ellys1000@gmail.com</a>
+            <a>github.com/TheDarkThatBarks</a>
+            <a>(848) 525-9553</a>
+        </div>
+    
         <div class="project" id="cozycoast" hidden>
             <div class="page">
                 <div class="column-small">
                     <div class="textbox">
-                        <div class="details-container-container">
-                            <h2 class="button details" onclick="revealDetails(this.parentElement)">
-                                <div class="arrow"></div>
-                                Project Details
-                            </h2>
-                            <div class="details-container">
+                        <div class="details-container">
+                            <h2 class="details">Project Details</h2>
+                            <div class="details-table">
                                 <div class="details">
                                     <h3>Role</h3>
                                     <p>Lead Programmer</p>
@@ -112,7 +122,7 @@
                     <h2 class="button" onclick="window.open('https:/\/github.com/TheDarkThatBarks/CozyCoast/releases/download/beta/CozyCoast-Beta.zip')">Download</h2>
                     <button class="button page" onclick="changePage(this)" data-dir="down">
                         <h2>Technical Overview</h2>
-                        <img src="Images/Down Arrow.png">
+                        <img src="Images/CozyCoast/Down Arrow.png">
                     </button>
                 </div>
                 <div class="column-small">
@@ -123,18 +133,100 @@
             </div>
 
             <div class="page">
-                <button class="button page" onclick="changePage(this)" data-dir="up">
-                    <h2>Overview</h2>
-                    <img src="Images/Down Arrow.png" style="transform: rotate(180deg);">
-                </button>
+                <div class="column-big">
+                    <button class="button page" onclick="changePage(this)" data-dir="up">
+                        <h2>Overview</h2>
+                        <img src="Images/CozyCoast/Down Arrow.png" style="transform: rotate(180deg);">
+                    </button>
+                </div>
+                <div class="column-big">
+                    <img class="project" src="Images/CozyCoast/Title.png">
+                </div>
             </div>
 
             <button class="close" onclick="closeProject()">&#215;</button>
         </div>
-        <div class="project" id="test2" hidden>
+        <div class="project" id="yourmusicistrash" hidden>
+            <div class="page">
+                <div class="column-small">
+                    <div class="textbox">
+                        <div class="details-container">
+                            <h2 class="details">Project Details</h2>
+                            <div class="details-table">
+                                <div class="details">
+                                    <h3>Role</h3>
+                                    <p>Programmer</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Software</h3>
+                                    <p>Visual Studio, Git</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Development Time</h3>
+                                    <p>2 weeks</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Language</h3>
+                                    <p>C++</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Team Size</h3>
+                                    <p>2</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Release Date</h3>
+                                    <p>March 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            The music festivals came and left, and the toxic music runoff they left behind ran rampant!
+                        </p>
+                        <p>
+                            Play as Jerry the Janitor as you clean up some the garbage that these terrible tunes infected, out-grooving their trash music!
+                        </p>
+                    </div>
+                </div>
+                <div class="column-big" style="justify-content: flex-start;">
+                    <h1>Your Music is Trash</h1>
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/robZFC9y200?si=IWoFZJ5c0071XrgJ"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                    <iframe frameborder="0" src="https://itch.io/embed/3056678?linkback=true&amp;bg_color=000000&amp;fg_color=FFFF00&amp;link_color=e53b44&amp;border_color=FFFF00" width="552" height="167">
+                        <a href="https://thedarkthatbarks.itch.io/your-music-is-trash">
+                            Your Music Is Trash by TheDarkThatBarks
+                        </a>
+                    </iframe>
+                    <button class="button page" onclick="changePage(this)" data-dir="down">
+                        <h2>Technical Overview</h2>
+                        <img src="Images/YourMusicIsTrash/Down Arrow.png">
+                    </button>
+                </div>
+                <div class="column-small">
+                    <img class="project" src="Images/YourMusicIsTrash/Title.png">
+                    <img class="project" src="Images/YourMusicIsTrash/Level1.png">
+                    <img class="project" src="Images/YourMusicIsTrash/Level3.png">
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="column-big">
+                    <button class="button page" onclick="changePage(this)" data-dir="up">
+                        <h2>Overview</h2>
+                        <img src="Images/YourMusicIsTrash/Down Arrow.png" style="transform: rotate(180deg);">
+                    </button>
+                </div>
+                <div class="column-big">
+                    <img class="project" src="Images/CozyCoast/Title.png">
+                </div>
+            </div>
+
             <button class="close" onclick="closeProject()">&#215;</button>
         </div>
     </div>
+    <img src="Images/Numbers/Bottom 2.png" style="width: 110%; height: 110%;">
     <div id="background"></div>
 </body>
 </html>
