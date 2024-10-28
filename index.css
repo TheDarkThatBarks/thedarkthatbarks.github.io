@@ -42,11 +42,12 @@ html {
 
 body {
     min-height: 100%;
+    width: 100%;
     color: var(--outline);
     background-color: var(--background);
     font-family: Kode Mono;
     /*font-family: Monaco;*/
-    overflow-x: hidden;
+    margin: 0;
 }
 
 #main {
@@ -55,26 +56,46 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 100%;
+}
+
+#main > h1 {
+    font-size: 400%;
+    text-shadow: 2px 2px 2px black;
 }
 
 nav {
+    width: auto;
     text-align: center;
     font-size: 150%;
+
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
 }
 
 nav a {
+    height: fit-content;
+    width: fit-content;
+    text-wrap: nowrap;
     padding: 5px;
+    margin: 10px;
     border: 3px solid var(--outline);
     text-decoration: none;
     color: var(--outline);
     background-color: var(--background);
 }
 
+nav a:hover {
+    border-width: 5px;
+    padding: 5px 3px;
+}
+
 #hidden-nav {
     visibility: hidden;
     position: fixed;
     width: auto;
+    /*height: 80px;*/
     top: 0;
     background-color: var(--background);
     padding: 30px 30px;
@@ -179,6 +200,7 @@ div.project {
 
 img.project {
     width: 100%;
+    margin: 1% 0;
 }
 
 [class^="column"] {
@@ -199,6 +221,10 @@ img.project {
 
 .column-big {
     width: 49%;
+}
+
+.column-big > * {
+    margin: 2%;
 }
 
 .close {
@@ -375,12 +401,25 @@ div.page {
 
 .contact {
     display: flex;
-    justify-content: center;
-    width: 100%;
+    justify-content: space-around;
+    width: 80%;
 }
 
 .contact a {
     margin: 1%;
+    font-size: 150%;
+    color: var(--outline);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 20%;
+}
+
+.contact img {
+    width: 33%;
 }
 
 #back {
@@ -393,6 +432,7 @@ div.page {
     opacity: 0;
     z-index: -2;
     transition: opacity 0.5s;
+    box-sizing: border-box;
 }
 
 @keyframes makeVisible {
@@ -415,4 +455,8 @@ div.page {
     animation-duration: 2s;
     animation-play-state: paused;
     animation-fill-mode: forwards;
+}
+
+.aboutme > p {
+    text-shadow: 2px 2px 2px black;
 }

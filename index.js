@@ -6,8 +6,6 @@ const heightPercent = 0.9;
 let currentProject = null;
 let projectClosing = false;
 
-let navHeight = null;
-
 const refresh = function () {
     body = document.body.getBoundingClientRect();
     projectWidth = widthPercent * window.visualViewport.width;
@@ -126,18 +124,15 @@ const removeChar = function (element) {
 
 document.addEventListener("scroll", (event) => {
     const nav = document.querySelector("#hidden-nav");
-    if (window.scrollY > navHeight)
-        nav.style.visibility = "visible";
-    if (window.scrollY <= navHeight)
-        nav.style.visibility = "hidden";
+    const navHeight = document.querySelector("nav").getBoundingClientRect().top - parseFloat(getComputedStyle(nav).paddingTop) + window.scrollY;
+    console.log("onscroll", navHeight);
+    nav.style.visibility = window.scrollY > navHeight ? "visible" : "hidden";
 });
 
-const load = function () {
-    const nav = document.querySelector("#hidden-nav");
-    navHeight = document.querySelector("nav").getBoundingClientRect().top - parseFloat(getComputedStyle(nav).paddingTop) + window.scrollY;
-    document.querySelectorAll(".anchor").forEach((element) => {
+window.onload = function (event) {
+    /*document.querySelectorAll(".anchor").forEach((element) => {
         element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 10}px`;
-    });
+    });*/
     backgroundAnimation();
 };
 
