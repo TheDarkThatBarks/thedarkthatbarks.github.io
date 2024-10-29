@@ -342,6 +342,10 @@ h2.details {
     margin-top: 8px;
 }
 
+.details {
+    margin: 0px 5px;
+}
+
 .textbox {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
