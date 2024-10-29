@@ -176,6 +176,10 @@ hr {
     background-image: url(Images/HackerMan/Logo.png);
 }
 
+.thumbnail.sudokusolver {
+    background-image: url(Images/SudokuSolver/Logo.png);
+}
+
 div.project {
     width: 80%;
     aspect-ratio: 16/9;
