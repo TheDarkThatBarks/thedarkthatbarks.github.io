@@ -34,6 +34,12 @@
     initial-value: rgb(255, 255, 0);
 }
 
+@property --campusconnect {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: rgb(172, 43, 55);
+}
+
 html {
     height: 100%;
     scroll-behavior: smooth;
@@ -110,6 +116,10 @@ nav a:hover {
     border-width: 0px 2px 2px 2px;
 }
 
+.anchor {
+    margin-bottom: 10px;
+}
+
 #project-thumbnails {
     width: 100%;
     margin-top: 2%;
@@ -132,6 +142,7 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .thumbnail {
@@ -162,6 +173,7 @@ hr {
 
 .thumbnail-container h2 {
     margin: 0;
+
 }
 
 .thumbnail.cozycoast {
@@ -174,6 +186,10 @@ hr {
 
 .thumbnail.hackerman {
     background-image: url(Images/HackerMan/Logo.png);
+}
+
+.thumbnail.campusconnect {
+    background-image: url(Images/CampusConnect/Logo.png);
 }
 
 .thumbnail.sudokusolver {
@@ -267,12 +283,12 @@ img.project {
 
 .details-container {
     width: 95%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background-color: rgb(0 0 0 / 0.6);
     border: 1px solid white;
     border-radius: 15px;
     margin-top: 15px;
-    height: auto;
+    height: fit-content;
     transition: height 0.4s ease-out;
 }
 
@@ -282,6 +298,10 @@ img.project {
 
 #yourmusicistrash .details-container {
     border-color: var(--yourmusicistrash);
+}
+
+#campusconnect .details-container {
+    border-color: var(--campusconnect);
 }
 
 .button.details {
@@ -388,6 +408,18 @@ div.page {
     background-image: url('Images/CozyCoast/Background.png')
 }
 
+#campusconnect {
+    background-color: var(--campusconnect);
+}
+
+#campusconnect .textbox {
+    background-color: rgb(144, 37, 48);
+}
+
+#campusconnect .button {
+    background-color: rgb(144, 37, 48);
+}
+
 #cozycoast *:not(.close) {
     font-family: Merienda;
     color: var(--cozycoast);
@@ -401,6 +433,11 @@ div.page {
 #hackerman *:not(.close) {
     font-family: Kode Mono;
     color: rgb(204, 204, 204);
+}
+
+#campusconnect *:not(.close) {
+    font-family: Times New Roman;
+    color: rgb(255, 255, 255);
 }
 
 .contact {

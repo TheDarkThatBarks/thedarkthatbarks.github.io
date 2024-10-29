@@ -22,7 +22,7 @@ const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
 
 const showProject = function(thumbnail) {
     if (currentProject) {
-        console.log("DEBUG");
+        //console.log("DEBUG");
         closeProject();
         return;
     }
@@ -125,24 +125,20 @@ const removeChar = function (element) {
 document.addEventListener("scroll", (event) => {
     const nav = document.querySelector("#hidden-nav");
     const navHeight = document.querySelector("nav").getBoundingClientRect().top - parseFloat(getComputedStyle(nav).paddingTop) + window.scrollY;
-    console.log("onscroll", navHeight);
+    //console.log("onscroll", navHeight);
     nav.style.visibility = window.scrollY > navHeight ? "visible" : "hidden";
 });
 
 window.onload = function (event) {
-    /*document.querySelectorAll(".anchor").forEach((element) => {
-        element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 10}px`;
-    });*/
     backgroundAnimation();
 };
 
-/*const resizeProject = function() {
-    refresh();
-    currentProject.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
-    currentProject.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
-    currentProject.style.width = `${projectWidth}px`;
-    currentProject.style.height = `${projectHeight}px`;
-};*/
+const fixAnchors = function () {
+    const nav = document.querySelector("#hidden-nav");
+    document.querySelectorAll(".anchor").forEach((element) => {
+        element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 30}px`;
+    });
+};
 
 const revealDetails = function (details) {
     if (details.dataset.open == "1") {
