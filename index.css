@@ -196,6 +196,10 @@ hr {
     background-image: url(Images/SudokuSolver/Logo.png);
 }
 
+.thumbnail.pixelpunk {
+    background-image: url(Images/PixelPunk/Logo.png);
+}
+
 div.project {
     width: 80%;
     aspect-ratio: 16/9;
@@ -434,7 +438,7 @@ div.page {
     color: var(--yourmusicistrash);
 }
 
-#hackerman *:not(.close) {
+#hackerman *:not(.close), #pixelpunk *:not(.close) {
     font-family: Kode Mono;
     color: rgb(204, 204, 204);
 }
