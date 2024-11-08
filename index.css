@@ -177,27 +177,27 @@ hr {
 }
 
 .thumbnail.cozycoast {
-    background-image: url(Images/CozyCoast/Logo.png);
+    background-image: url(Images/CozyCoast/Logo.webp);
 }
 
 .thumbnail.yourmusicistrash {
-    background-image: url(Images/YourMusicIsTrash/Logo.png);
+    background-image: url(Images/YourMusicIsTrash/Logo.webp);
 }
 
 .thumbnail.hackerman {
-    background-image: url(Images/HackerMan/Logo.png);
+    background-image: url(Images/HackerMan/Logo.webp);
 }
 
 .thumbnail.campusconnect {
-    background-image: url(Images/CampusConnect/Logo.png);
+    background-image: url(Images/CampusConnect/Logo.webp);
 }
 
 .thumbnail.sudokusolver {
-    background-image: url(Images/SudokuSolver/Logo.png);
+    background-image: url(Images/SudokuSolver/Logo.webp);
 }
 
 .thumbnail.pixelpunk {
-    background-image: url(Images/PixelPunk/Logo.png);
+    background-image: url(Images/PixelPunk/Logo.webp);
 }
 
 div.project {
@@ -413,7 +413,7 @@ div.page {
 }
 
 #cozycoast {
-    background-image: url('Images/CozyCoast/Background.png')
+    background-image: url('Images/CozyCoast/Background.webp')
 }
 
 #campusconnect {
