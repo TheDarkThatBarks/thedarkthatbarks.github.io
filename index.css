@@ -263,7 +263,8 @@ img.project {
     justify-content: center;
     align-items: center;
 
-    background-color: var(--background);
+    /*background-color: var(--background);*/
+    background: no-repeat center/50% url(Images/Close.png), var(--background);
     color: var(--outline);
     border-width: 5px;
     border-color: var(--outline);
