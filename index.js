@@ -6,6 +6,8 @@ const heightPercent = 0.9;
 let currentProject = null;
 let projectClosing = false;
 
+const desktop = window.matchMedia("(orientation: landscape)").matches;
+
 const refresh = function () {
     body = document.body.getBoundingClientRect();
     projectWidth = widthPercent * window.visualViewport.width;
@@ -14,7 +16,7 @@ const refresh = function () {
     button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
     const details = currentProject.querySelector(".details-table")
     if (details)
-        details.style.gridTemplateRows = `repeat(3, ${projectHeight * 0.35 / 3}px)`;
+        details.style.gridTemplateRows = `repeat(${desktop ? 3 : 2}, ${desktop ? (projectHeight * 0.35 / 3) : (projectHeight * 0.24 / 2)}px)`;
     //console.log(getComputedStyle(currentProject.querySelector(".details-table")).gridTemplateRows);
 };
 
@@ -26,8 +28,9 @@ const showProject = function(thumbnail) {
         closeProject();
         return;
     }
-    const project = document.querySelector(`#${thumbnail.classList[0]}`);
+    const project = document.querySelector(`.${desktop ? "desktop" : "mobile"} > #${thumbnail.classList[0]}`);
     currentProject = project;
+    //console.log(currentProject);
     refresh();
     thumbnail.dataset.open = "1";
 
@@ -153,7 +156,8 @@ const revealDetails = function (details) {
 };
 
 const changePage = function (button) {
+    console.log(currentProject.scrollTop);
     const pages = Array.from(currentProject.querySelectorAll("div.page"));
     const page = pages.indexOf(button.closest("div.page")) + (button.dataset.dir === "down" ? 1 : -1);
-    currentProject.scrollTo(0, pages[page].getBoundingClientRect().top);
+    currentProject.scroll(0, page * projectHeight);
 };
