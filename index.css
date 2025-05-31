@@ -2,12 +2,12 @@
     font-family: 'Monaco';
     font-style: normal;
     font-weight: normal;
-    src: local('Monaco'), url('Fonts/Monaco.woff') format('woff');
+    src: local('Monaco'), url(Fonts/Monaco.woff) format('woff');
 }
 
 @font-face {
     font-family: 'Typewriter';
-    src: url('Fonts/df-font.ttf') format('truetype');
+    src: url(Fonts/df-font.ttf) format('truetype');
 }
 
 @property --background {
@@ -20,6 +20,12 @@
     syntax: "<color>";
     inherits: false;
     initial-value: rgb(22, 198, 12);
+}
+
+@property --memoria-altera {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: rgb(0, 235, 255);
 }
 
 @property --cozycoast {
@@ -174,6 +180,31 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    
+    transition: all 0.75s, line-height 0.75s ease-in, opacity 0.5s, margin 0s;
+}
+
+.thumbnail-clone {
+    aspect-ratio: auto;
+    position: fixed;
+    margin: 0;
+    z-index: 5;
+    
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.thumbnail-background {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    transition: opacity 0.75s;
 }
 
 @media (orientation: landscape) {
@@ -326,7 +357,10 @@ hr {
 
 .thumbnail-container h2 {
     margin: 0;
+}
 
+.thumbnail.memoria-altera {
+    background-image: url(Images/MemoriaAltera/Logo.png);
 }
 
 .thumbnail.cozycoast {
@@ -354,26 +388,35 @@ hr {
 }
 
 div.project {
-    width: 80%;
+    width: 90%;
     aspect-ratio: 16/9;
     position: fixed;
     background: #CCC;
-    transition: all 0.75s, line-height 0.75s ease-in, opacity 1s cubic-bezier(0.17, 0.67, 0.25, 1.01);
+    transition: all 0.75s, line-height 0.75s ease-in, opacity 0.5s cubic-bezier(0.17, 0.67, 0.25, 1.01);
     background-color: var(--background);
     outline: 5px solid var(--outline);
     opacity: 0;
 
-    overflow-y: clip;
+    overflow-y: scroll;
     overflow-x: hidden;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     scroll-behavior: smooth;
 
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: space-between;
 
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: 100% 100%;
     z-index: 10;
+
+    line-height: 1.2;
+}
+
+@keyframes openProject {
+    from {height: 0%;}
+    to {height: 90%;}
 }
 
 img.project {
@@ -384,7 +427,7 @@ img.project {
 [class^="column"] {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     height: 100%;
 }
@@ -451,6 +494,10 @@ img.project {
     height: fit-content;
     transition: height 0.4s ease-out;
     text-align: center;
+}
+
+#memoria-altera .details-container {
+    border-color: var(--memoria-altera);
 }
 
 #cozycoast .details-container {
@@ -571,8 +618,12 @@ iframe.game {
     /*width: 100%;*/
 }
 
+#memoria-altera {
+    background-image: url(Images/MemoriaAltera/Background.png);
+}
+
 #cozycoast {
-    background-image: url('Images/CozyCoast/Background.webp')
+    background-image: url(Images/CozyCoast/Background.webp);
 }
 
 #campusconnect {
@@ -585,6 +636,11 @@ iframe.game {
 
 #campusconnect .button {
     background-color: rgb(144, 37, 48);
+}
+
+#memoria-altera *:not(.close) {
+    font-family: Orbitron;
+    color: var(--memoria-altera);
 }
 
 #cozycoast *:not(.close) {

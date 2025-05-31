@@ -1,60 +1,73 @@
 let body, projectWidth, projectHeight;
-const aspectRatio = 20/9;
-const widthPercent = 0.8;
-const heightPercent = 0.9;
+const widthPercent = 0.95;
+const heightPercent = 0.95;
 
 let currentProject = null;
-let projectClosing = false;
+// let clone = null;
 
 const desktop = window.matchMedia("(orientation: landscape)").matches;
 
 const refresh = function () {
-    body = document.body.getBoundingClientRect();
     projectWidth = widthPercent * window.visualViewport.width;
     projectHeight = heightPercent * window.visualViewport.height;
+
     const button = currentProject.querySelector(".close");
     button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
-    const details = currentProject.querySelector(".details-table")
+
+    currentProject.querySelector(".column-small:nth-last-child(2) > *:first-child").style.marginTop = `${projectHeight * 0.1}px`;
+    
+    const details = currentProject.querySelector(".details-table");
     if (details)
         details.style.gridTemplateRows = `repeat(${desktop ? 3 : 2}, ${desktop ? (projectHeight * 0.35 / 3) : (projectHeight * 0.24 / 2)}px)`;
-    //console.log(getComputedStyle(currentProject.querySelector(".details-table")).gridTemplateRows);
 };
 
 const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
 
 const showProject = function(thumbnail) {
     if (currentProject) {
-        //console.log("DEBUG");
         closeProject();
         return;
     }
+
+    thumbnail.dataset.open = "1";
     const project = document.querySelector(`.${desktop ? "desktop" : "mobile"} > #${thumbnail.classList[0]}`);
     currentProject = project;
-    //console.log(currentProject);
     refresh();
-    thumbnail.dataset.open = "1";
 
-    const startBox = thumbnail.getBoundingClientRect();
-    project.style.top = `${startBox.top}px`;
-    project.style.left = `${startBox.left}px`;
-    project.style.width = `${startBox.width}px`;
-    project.style.height = `${startBox.height}px`;
-    project.style.fontSize = "5px";
-    project.style.lineHeight = "1.2";
-    project.style.display = "flex";
-    project.hidden = false;
+    const clone = thumbnail.parentElement.cloneNode();
+    clone.style.backgroundImage = getComputedStyle(thumbnail).backgroundImage;
+    clone.classList.add("thumbnail-clone");
+    clone.id = "clone";
+    document.body.appendChild(clone);
+
+    const newBackground = document.createElement("div");
+    newBackground.classList.add("thumbnail-background");
+    newBackground.style.backgroundImage = getComputedStyle(currentProject).backgroundImage;
+    clone.appendChild(newBackground);
+
+    const box = thumbnail.getBoundingClientRect();
+    clone.style.top = `${box.top}px`;
+    clone.style.left = `${box.left}px`;
+    clone.style.height = `${box.height}px`;
+    clone.style.width = `${box.width}px`;
     setTimeout(() => {
-        project.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
-        project.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
-        //project.style.width = `${projectWidth}px`;
-        project.style.width = "80vw";
-        //project.style.height = `${projectHeight}px`;
-        project.style.height = "90vh";
-        project.style.opacity = "1";
-        project.style.backgroundSize = "100% 100%";
-        project.style.fontSize = "16px";
-        project.style.lineHeight = "1.2";
+        clone.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
+        clone.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
+        clone.style.width = `${widthPercent * 100}vw`;
+        clone.style.height = `${heightPercent * 100}vh`;
+        newBackground.style.opacity = "1";
     }, 1);
+
+    project.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
+    project.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
+    project.style.width = `${widthPercent * 100}vw`;
+    project.style.height = `${heightPercent * 100}vh`;
+    project.style.fontSize = "5px";
+    project.style.display = "flex";
+    setTimeout(() => {
+        project.style.opacity = "1";
+        project.style.fontSize = "16px";
+    }, 750);
     document.querySelector("#back").style.zIndex = "2";
     document.querySelector("#back").style.opacity = "0.6";
 };
@@ -63,35 +76,39 @@ const closeProject = function () {
     if (currentProject) {
         const project = currentProject;
         currentProject = null;
+        
         const thumbnail = document.querySelector(`.${project.id}.thumbnail`);
-        thumbnail.dataset.open = "0";
-        const transition = getComputedStyle(project).transition;
-        project.style.transition = "none";
-        project.style.top = `${project.getBoundingClientRect().top + window.scrollY}px`;
-        project.style.position = "absolute";
+        const clone = document.querySelector("#clone");
+        const transition = getComputedStyle(clone).transition;
+        clone.style.transition = "none";
+
+        let box = clone.getBoundingClientRect();
+        clone.style.position = "absolute";
+        clone.style.top = `${box.top + window.scrollY}px`;
+        clone.style.left = `${box.left}px`;
+        clone.style.height = `${box.height}px`;
+        clone.style.width = `${box.width}px`;
+
+        project.style.opacity = "0";
         setTimeout(() => {
-            project.style.transition = transition;
-            const box = thumbnail.getBoundingClientRect();
-            project.style.top = `${box.top + window.scrollY}px`;
-            project.style.left = `${box.left}px`;
-            project.style.width = `${box.width}px`;
-            project.style.height = `${box.height}px`
-            project.style.opacity = "0";
-            project.style.backgroundSize = "100% 100%";
-            project.style.fontSize = "5px";
-            project.style.lineHeight = "1.2";
-            project.scrollTop = 0;
+            clone.style.transition = transition;
+            box = thumbnail.getBoundingClientRect();
+            clone.style.top = `${box.top + window.scrollY}px`;
+            clone.style.left = `${box.left}px`;
+            clone.style.height = `${box.height}px`;
+            clone.style.width = `${box.width}px`;
+
+            project.style.display = "none";
             document.querySelector("#back").style.opacity = "0";
+            clone.querySelector("div").style.opacity = "0";
             setTimeout(() => {
                 document.querySelector("#back").style.zIndex = "-2";
             }, 500);
             setTimeout(() => {
-                project.style.display = "none";
-                project.style.position = "fixed";
-            }, Math.max(...getComputedStyle(project).transitionDuration.split(" ").map((d) => {
-                return Number(d.split("s")[0]);
-            })) * 1000);
-        }, 1);
+                clone.remove();
+                thumbnail.dataset.open = "0";
+            }, 750);
+        }, 500);
     }
 };
 

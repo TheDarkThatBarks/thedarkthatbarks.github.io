@@ -59,6 +59,11 @@
         <h1 class="anchor" id="projects">Projects</h1>
         <div id="project-thumbnails">
             <div class="thumbnail-container">
+                <h2>Memoria Altera</h2>
+                <hr>
+                <div class="memoria-altera thumbnail" title="Memoria Altera Logo" onclick="showProject(this)"></div>
+            </div>
+            <div class="thumbnail-container">
                 <h2>Cozy Coast</h2>
                 <hr>
                 <div class="cozycoast thumbnail" title="Cozy Coast Logo" onclick="showProject(this)"></div>
@@ -120,68 +125,125 @@
         </div>
         
         <div class="desktop">
+            <div class="project" id="memoria-altera" title="Memoria Altera" hidden>
+                <div class="column-small">
+                    <div class="details-container">
+                        <h2 class="details">Project Details</h2>
+                        <div class="details-table">
+                            <div class="details">
+                                <h3>Role</h3>
+                                <p>Tech Coordinator, Cutscene Programmer</p>
+                            </div>
+                            <div class="details">
+                                <h3>Software</h3>
+                                <p>Unreal 5, Git</p>
+                            </div>
+                            <div class="details">
+                                <h3>Development Time</h3>
+                                <p>9 Months</p>
+                            </div>
+                            <div class="details">
+                                <h3>Language</h3>
+                                <p>Blueprints</p>
+                            </div>
+                            <div class="details">
+                                <h3>Team Size</h3>
+                                <p>6</p>
+                            </div>
+                            <div class="details">
+                                <h3>Release Date</h3>
+                                <p>May 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-big">
+                    <h1>Memoria Altera</h1>
+                    <iframe src="https://store.steampowered.com/widget/3688120/"
+                            frameborder="0" style="width: 50%; height: 15vh;">
+                    </iframe>
+                    <iframe frameborder="0"
+                            src="https://itch.io/embed/3525547?border_width=2&amp;bg_color=000000&amp;fg_color=2ce8f4&amp;link_color=2ce8f4&amp;border_color=333333"
+                            width="50%">
+                        <a href="https://thedarkthatbarks.itch.io/memoria-altera">
+                            Memoria Altera by TheDarkThatBarks, Keenan, hayyyyyden, AwokenOwen, ThoughtlessPerspective, hammersorethumb
+                        </a>
+                    </iframe>
+                </div>
+                <div class="column-small">
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/uq7wVDeqxm4?si=cNalpvCa-JjW1XYz"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+                    </iframe>
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/MnBlK7SpMtg?si=Xjbw4v3WecQte2kP"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+                    </iframe>
+                </div>
+
+                <button class="close" onclick="closeProject()"></button>
+            </div>
+
             <div class="project" id="cozycoast" title="Cozy Coast" hidden>
-                <div class="page">
-                    <div class="column-small">
-                        <div class="textbox">
-                            <div class="details-container">
-                                <h2 class="details">Project Details</h2>
-                                <div class="details-table">
-                                    <div class="details">
-                                        <h3>Role</h3>
-                                        <p>Lead Programmer</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Software</h3>
-                                        <p>Unreal 5, Git</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Development Time</h3>
-                                        <p>7 weeks</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Language</h3>
-                                        <p>Blueprints</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Team Size</h3>
-                                        <p>7</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Release Date</h3>
-                                        <p>May 2024</p>
-                                    </div>
+                <div class="column-small">
+                    <div class="textbox">
+                        <div class="details-container">
+                            <h2 class="details">Project Details</h2>
+                            <div class="details-table">
+                                <div class="details">
+                                    <h3>Role</h3>
+                                    <p>Lead Programmer</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Software</h3>
+                                    <p>Unreal 5, Git</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Development Time</h3>
+                                    <p>7 weeks</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Language</h3>
+                                    <p>Blueprints</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Team Size</h3>
+                                    <p>7</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Release Date</h3>
+                                    <p>May 2024</p>
                                 </div>
                             </div>
-                            <p>
-                                A young falconer decides to go visit their grandfather, who happens to be the only fisherman in a little rundown coastal town. Upon arrival, their grandfather asks them to help out with meeting the fishing quota through falconry. Along the way, the falconer learns about the history of the town and the people who live in it.
-                            </p>
-                            <p>
-                                Players will get to explore the town and interact with townsfolk as the falconer. They will also catch fish and find trinkets as a falcon.
-                            </p>
                         </div>
+                        <p>
+                            A young falconer decides to go visit their grandfather, who happens to be the only fisherman in a little rundown coastal town. Upon arrival, their grandfather asks them to help out with meeting the fishing quota through falconry. Along the way, the falconer learns about the history of the town and the people who live in it.
+                        </p>
+                        <p>
+                            Players will get to explore the town and interact with townsfolk as the falconer. They will also catch fish and find trinkets as a falcon.
+                        </p>
                     </div>
-                    <div class="column-big">
-                        <h1>Cozy Coast</h1>
-                        <iframe allowfullscreen src="https://youtube.com/embed/l-vQznp2jZc"
-                                style="border: none; width: 100%; aspect-ratio: 16/9;"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin">
-                        </iframe>
-                        <div class="button-container">
-                            <h2 class="button" onclick="window.open('https:\/\/sites.google.com/view/cozy-coast/')">Website</h2>
-                            <h2 class="button" onclick="window.open('https:/\/github.com/TheDarkThatBarks/CozyCoast/releases/download/beta/CozyCoast-Beta.zip')">Download</h2>
-                        </div>
-                        <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                            <h2>Technical Overview</h2>
-                            <img src="Images/CozyCoast/Down Arrow.webp" alt="Down Arrow">
-                        </button>-->
+                </div>
+                <div class="column-big">
+                    <h1>Cozy Coast</h1>
+                    <iframe allowfullscreen src="https://youtube.com/embed/l-vQznp2jZc"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                    <div class="button-container">
+                        <h2 class="button" onclick="window.open('https:\/\/sites.google.com/view/cozy-coast/')">Website</h2>
+                        <h2 class="button" onclick="window.open('https:/\/github.com/TheDarkThatBarks/CozyCoast/releases/download/beta/CozyCoast-Beta.zip')">Download</h2>
                     </div>
-                    <div class="column-small">
-                        <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
-                        <img class="project" src="Images/CozyCoast/Fishing.webp" alt="Fishing Minigame">
-                        <img class="project" src="Images/CozyCoast/Dialog.webp" alt="Dialog">
-                    </div>
+                    <!--<button class="button page" onclick="changePage(this)" data-dir="down">
+                        <h2>Technical Overview</h2>
+                        <img src="Images/CozyCoast/Down Arrow.webp" alt="Down Arrow">
+                    </button>-->
+                </div>
+                <div class="column-small">
+                    <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
+                    <img class="project" src="Images/CozyCoast/Fishing.webp" alt="Fishing Minigame">
+                    <img class="project" src="Images/CozyCoast/Dialog.webp" alt="Dialog">
                 </div>
     
                 <!--<div class="page">
@@ -247,7 +309,9 @@
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerpolicy="strict-origin-when-cross-origin">
                         </iframe>
-                        <iframe frameborder="0" src="https://itch.io/embed/3056678?linkback=true&amp;border_width=2&amp;bg_color=000000&amp;fg_color=FFFF00&amp;link_color=e53b44&amp;border_color=FFFF00" width="552" height="167">
+                        <iframe frameborder="0"
+                                src="https://itch.io/embed/3056678?linkback=true&amp;border_width=2&amp;bg_color=000000&amp;fg_color=FFFF00&amp;link_color=e53b44&amp;border_color=FFFF00"
+                                width="552" height="167">
                             <a href="https://thedarkthatbarks.itch.io/your-music-is-trash">
                                 Your Music Is Trash by TheDarkThatBarks
                             </a>
