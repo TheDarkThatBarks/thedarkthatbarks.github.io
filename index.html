@@ -40,13 +40,13 @@
             <a href="#resume">Resume</a>
             <a href="#contact">Contact</a>
         </nav>
-        <nav id="hidden-nav" onload="navLoad(this)">
+        <!-- <nav id="hidden-nav" onload="navLoad(this)">
             <a href="#">Home</a>
             <a href="#aboutme">About Me</a>
             <a href="#projects">Projects</a>
             <a href="#resume">Resume</a>
             <a href="#contact">Contact</a>
-        </nav>
+        </nav> -->
         <h1 class="anchor" id="aboutme">About Me</h1>
         <div class="aboutme">
             <img src="Images/Me2.webp" alt="Picture of Me">
@@ -118,14 +118,14 @@
                 <img src="Images/Mail.webp" alt="Email">
                 <p>ellys.gorodisch@gmail.com</p>
             </a>
-            <a href="tel:848-525-9553" target="_blank">
+            <!-- <a href="tel:848-525-9553" target="_blank">
                 <img src="Images/Phone.webp" alt="Phone">
                 <p>(848) 525-9553</p>
-            </a>
+            </a> -->
         </div>
         
         <div class="desktop">
-            <div class="project" id="memoria-altera" title="Memoria Altera" hidden>
+            <div class="project" id="memoria-altera" hidden>
                 <div class="column-small">
                     <div class="details-container">
                         <h2 class="details">Project Details</h2>
@@ -155,12 +155,17 @@
                                 <p>May 2025</p>
                             </div>
                         </div>
+                        <div class="details">
+                            <h3>Awards</h3>
+                            <p>IMGD Provost Award, WPI Showfest 2025</p>
+                            <p>Featured at PAX EAST 2025</p>
+                        </div>
                     </div>
                 </div>
                 <div class="column-big">
                     <h1>Memoria Altera</h1>
                     <iframe src="https://store.steampowered.com/widget/3688120/"
-                            frameborder="0" style="width: 50%; height: 15vh;">
+                            frameborder="0" style="width: 50%; min-height: 15vh;">
                     </iframe>
                     <iframe frameborder="0"
                             src="https://itch.io/embed/3525547?border_width=2&amp;bg_color=000000&amp;fg_color=2ce8f4&amp;link_color=2ce8f4&amp;border_color=333333"
@@ -169,6 +174,82 @@
                             Memoria Altera by TheDarkThatBarks, Keenan, hayyyyyden, AwokenOwen, ThoughtlessPerspective, hammersorethumb
                         </a>
                     </iframe>
+                    <h2>About</h2>
+                        <div class="textbox">    
+                            <p><i>Memoria Altera</i> is a narrative-driven puzzle game where you wake up on the floor suffering from amnesia. You must explore the futuristic lab you woke up in to recover your memories with the aid of a fellow amnesiac who is just as confused as you are. Venture deeper into the lab and unravel the secrets of who you were before losing your memories!</p>
+                            <p>This game was completed as part of my senior capstone project at Worcester Polytechnic Institute by a team of 6 core members and 2 contracted workers.</p>
+                            <p>I and my fellow programmer Owen Knizak started as both general programmers, planning to split the programming tasks between the two of us evenly. However, Owen was rediagnosed with brain cancer halfway through the year. This led to us bringing in another programmer to help out, and myself transitioning to the role of tech coordinator.</p>
+                        </div>
+                    <h2>Cutscene System</h2>
+                        <div class="textbox">
+                            <p>The system that composed the majority of my work on <i>Memoria Altera</i> was a cutscene camera system. Unreal Engine has its own built-in cinematic camera system, but we felt that it lacked the level of interaction that we desired to easily implement quick time events and other forms of player interaction during cinematic moments.</p>
+                            <img src="Images/MemoriaAltera/Cutscene.gif" alt="Cutscene">
+                            <p>Example of a Quick Time Event in a cutscene in <i>Memoria Altera</i></p>
+                        </div>
+                    <h3>Core Components</h3>
+                        <div class="textbox">
+                            <p>To implement this camera system, I created 3 core components.</p>
+                            <p>The first of which is a spline path. A spline is a series of points connected by curves. These are incredibly useful for making paths in the engine's editor, as you can place the points and angle the curves between them very easily.</p>
+                            <p>The second component is the main loop. The diagram below is a simplified version of the actual code, but it captures the essence.</p>
+                            <img src="Images/MemoriaAltera/MainLoop.png" alt="Main Loop">
+                            <p>Flow Diagram of Cutscene Camera Main Loop</p>
+                        </div>
+                    <h3>Nodes System</h3>
+                        <div class="textbox">
+                            <p>The third core component of this camera system are the nodes that can be placed along the path. These nodes can control the behavior of the cutscene camera as well as the game world.</p>
+                            <table id="nodes">
+                                <tr>
+                                    <th>Node</th>
+                                    <th>Purpose</th>
+                                    <th>Parameters</th>
+                                </tr>
+                                <tr>
+                                    <td>Speed</td>
+                                    <td>Controls the speed of the camera</td>
+                                    <td>Distance/Time, New Speed, Time Dilation, Easing Function, Transition Time</td>
+                                </tr>
+                                <tr>
+                                    <td>Rotation</td>
+                                    <td>Controls the rotation of the camera</td>
+                                    <td>Distance/Time, New Rotation, Use Shortest Path?, Easing Function, Use Spline Rotation?, Use Mouse Rotation?, Transition Time</td>
+                                </tr>
+                                <tr>
+                                    <td>Trigger</td>
+                                    <td>Triggers event in the game world</td>
+                                    <td>Distance/Time, Trigger Class</td>
+                                </tr>
+                                <tr>
+                                    <td>Quick Time Event</td>
+                                    <td>Starts QTE</td>
+                                    <td>Distance/Time, Key, Time to Complete, Time Dilation, Spam Event?, Pause Movement?, QTE Class</td>
+                                </tr>
+                                <tr>
+                                    <td>Move Key</td>
+                                    <td>Force player to hold key to move forward</td>
+                                    <td>Distance/Time, Key</td>
+                                </tr>
+                            </table>
+                            <img src="Images/MemoriaAltera/Nodes.png" alt="Nodes">
+                            <p>Example of nodes placed along a camera path</p>
+                        </div>
+                    <h2>Puzzle and Interaction System</h2>
+                        <div class="textbox">
+                            <p>To implement player interaction and puzzles, we created a custom Interactable interface and a PuzzleBase class</p>
+                        </div>
+                    <h3>Interactable Interface</h3>
+                        <div class="textbox">
+                            <p></p>
+                            <img src="Images/MemoriaAltera/Highlight.gif" alt="Highlight">
+                            <p>Example of proximity highlight effect</p>
+                        </div>
+                    <h3>Puzzle Base</h3>
+                        <div class="textbox">
+                            <img src="Images/MemoriaAltera/PuzzleClasses.png" alt="Puzzle Classes">
+                            <p>Class Diagram of Puzzle classes</p>
+                            <p>All puzzle classes are children of the PuzzleBase class. This class has default implementations of OnInteract, LeaveInteract, and PuzzleComplete.</p>
+                            <p></p>
+                            <!-- <img> -->
+                        </div>
                 </div>
                 <div class="column-small">
                     <iframe allowfullscreen src="https://www.youtube.com/embed/uq7wVDeqxm4?si=cNalpvCa-JjW1XYz"
@@ -179,6 +260,10 @@
                             style="border: none; width: 100%; aspect-ratio: 16/9;"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
                     </iframe>
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/uOoo_5D0nDA?si=toJAX86LBM-FcMgg"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+                    </iframe>
                 </div>
 
                 <button class="close" onclick="closeProject()"></button>
@@ -186,42 +271,34 @@
 
             <div class="project" id="cozycoast" title="Cozy Coast" hidden>
                 <div class="column-small">
-                    <div class="textbox">
-                        <div class="details-container">
-                            <h2 class="details">Project Details</h2>
-                            <div class="details-table">
-                                <div class="details">
-                                    <h3>Role</h3>
-                                    <p>Lead Programmer</p>
-                                </div>
-                                <div class="details">
-                                    <h3>Software</h3>
-                                    <p>Unreal 5, Git</p>
-                                </div>
-                                <div class="details">
-                                    <h3>Development Time</h3>
-                                    <p>7 weeks</p>
-                                </div>
-                                <div class="details">
-                                    <h3>Language</h3>
-                                    <p>Blueprints</p>
-                                </div>
-                                <div class="details">
-                                    <h3>Team Size</h3>
-                                    <p>7</p>
-                                </div>
-                                <div class="details">
-                                    <h3>Release Date</h3>
-                                    <p>May 2024</p>
-                                </div>
+                    <div class="details-container">
+                        <h2 class="details">Project Details</h2>
+                        <div class="details-table">
+                            <div class="details">
+                                <h3>Role</h3>
+                                <p>Lead Programmer</p>
+                            </div>
+                            <div class="details">
+                                <h3>Software</h3>
+                                <p>Unreal 5, Git</p>
+                            </div>
+                            <div class="details">
+                                <h3>Development Time</h3>
+                                <p>7 weeks</p>
+                            </div>
+                            <div class="details">
+                                <h3>Language</h3>
+                                <p>Blueprints</p>
+                            </div>
+                            <div class="details">
+                                <h3>Team Size</h3>
+                                <p>7</p>
+                            </div>
+                            <div class="details">
+                                <h3>Release Date</h3>
+                                <p>May 2024</p>
                             </div>
                         </div>
-                        <p>
-                            A young falconer decides to go visit their grandfather, who happens to be the only fisherman in a little rundown coastal town. Upon arrival, their grandfather asks them to help out with meeting the fishing quota through falconry. Along the way, the falconer learns about the history of the town and the people who live in it.
-                        </p>
-                        <p>
-                            Players will get to explore the town and interact with townsfolk as the falconer. They will also catch fish and find trinkets as a falcon.
-                        </p>
                     </div>
                 </div>
                 <div class="column-big">
@@ -235,10 +312,14 @@
                         <h2 class="button" onclick="window.open('https:\/\/sites.google.com/view/cozy-coast/')">Website</h2>
                         <h2 class="button" onclick="window.open('https:/\/github.com/TheDarkThatBarks/CozyCoast/releases/download/beta/CozyCoast-Beta.zip')">Download</h2>
                     </div>
-                    <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                        <h2>Technical Overview</h2>
-                        <img src="Images/CozyCoast/Down Arrow.webp" alt="Down Arrow">
-                    </button>-->
+                    <div class="textbox">
+                        <p>
+                            A young falconer decides to go visit their grandfather, who happens to be the only fisherman in a little rundown coastal town. Upon arrival, their grandfather asks them to help out with meeting the fishing quota through falconry. Along the way, the falconer learns about the history of the town and the people who live in it.
+                        </p>
+                        <p>
+                            Players will get to explore the town and interact with townsfolk as the falconer. They will also catch fish and find trinkets as a falcon.
+                        </p>
+                    </div>
                 </div>
                 <div class="column-small">
                     <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
@@ -262,314 +343,352 @@
             </div>
     
             <div class="project" id="yourmusicistrash" hidden>
-                <div class="page">
-                    <div class="column-small">
-                        <div class="textbox">
-                            <div class="details-container">
-                                <h2 class="details">Project Details</h2>
-                                <div class="details-table">
-                                    <div class="details">
-                                        <h3>Role</h3>
-                                        <p>Programmer</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Software</h3>
-                                        <p>Visual Studio, Git</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Development Time</h3>
-                                        <p>2 weeks</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Language</h3>
-                                        <p>C++</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Team Size</h3>
-                                        <p>2</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Release Date</h3>
-                                        <p>March 2023</p>
-                                    </div>
-                                </div>
+                <div class="column-small">
+                    <div class="details-container">
+                        <h2 class="details">Project Details</h2>
+                        <div class="details-table">
+                            <div class="details">
+                                <h3>Role</h3>
+                                <p>Programmer</p>
                             </div>
-                            <p>
-                                The music festivals came and left, and the toxic music runoff they left behind ran rampant!
-                            </p>
-                            <p>
-                                Play as Jerry the Janitor as you clean up some the garbage that these terrible tunes infected, out-grooving their trash music!
-                            </p>
+                            <div class="details">
+                                <h3>Software</h3>
+                                <p>Visual Studio, Git</p>
+                            </div>
+                            <div class="details">
+                                <h3>Development Time</h3>
+                                <p>2 weeks</p>
+                            </div>
+                            <div class="details">
+                                <h3>Language</h3>
+                                <p>C++</p>
+                            </div>
+                            <div class="details">
+                                <h3>Team Size</h3>
+                                <p>2</p>
+                            </div>
+                            <div class="details">
+                                <h3>Release Date</h3>
+                                <p>March 2023</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="column-big">
-                        <h1>Your Music is Trash</h1>
-                        <iframe allowfullscreen src="https://www.youtube.com/embed/robZFC9y200?si=IWoFZJ5c0071XrgJ"
-                                style="border: none; width: 100%; aspect-ratio: 16/9;"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin">
-                        </iframe>
-                        <iframe frameborder="0"
-                                src="https://itch.io/embed/3056678?linkback=true&amp;border_width=2&amp;bg_color=000000&amp;fg_color=FFFF00&amp;link_color=e53b44&amp;border_color=FFFF00"
-                                width="552" height="167">
-                            <a href="https://thedarkthatbarks.itch.io/your-music-is-trash">
-                                Your Music Is Trash by TheDarkThatBarks
-                            </a>
-                        </iframe>
-                        <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                            <h2>Technical Overview</h2>
-                            <img src="Images/YourMusicIsTrash/Down Arrow.webp" alt="Down Arrow">
-                        </button>-->
-                    </div>
-                    <div class="column-small">
-                        <img class="project" src="Images/YourMusicIsTrash/Title.webp" alt="Title Screen">
-                        <img class="project" src="Images/YourMusicIsTrash/Level1.webp" alt="Level 1">
-                        <img class="project" src="Images/YourMusicIsTrash/Level3.webp" alt="Level 3">
+                </div>
+                <div class="column-big">
+                    <h1>Your Music is Trash</h1>
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/robZFC9y200?si=IWoFZJ5c0071XrgJ"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                    <iframe frameborder="0"
+                            src="https://itch.io/embed/3056678?linkback=true&amp;border_width=2&amp;bg_color=000000&amp;fg_color=FFFF00&amp;link_color=e53b44&amp;border_color=FFFF00"
+                            width="552" height="167">
+                        <a href="https://thedarkthatbarks.itch.io/your-music-is-trash">
+                            Your Music Is Trash by TheDarkThatBarks
+                        </a>
+                    </iframe>
+
+                    <div class="textbox">
+                        <p>
+                            The music festivals came and left, and the toxic music runoff they left behind ran rampant!
+                        </p>
+                        <p>
+                            Play as Jerry the Janitor as you clean up some the garbage that these terrible tunes infected, out-grooving their trash music!
+                        </p>
                     </div>
                 </div>
-    
-                <!--<div class="page">
-                    <div class="column-big">
-                        <button class="button page" onclick="changePage(this)" data-dir="up">
-                            <h2>Overview</h2>
-                            <img src="Images/YourMusicIsTrash/Down Arrow.webp" style="transform: rotate(180deg);" alt="Down Arrow">
-                        </button>
-                    </div>
-                    <div class="column-big">
-                        <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
-                    </div>
-                </div>-->
-    
+                <div class="column-small">
+                    <img class="project" src="Images/YourMusicIsTrash/Title.webp" alt="Title Screen">
+                    <img class="project" src="Images/YourMusicIsTrash/Level1.webp" alt="Level 1">
+                    <img class="project" src="Images/YourMusicIsTrash/Level3.webp" alt="Level 3">
+                </div>
+
                 <button class="close" onclick="closeProject()">&#215;</button>
             </div>
     
             <div class="project" id="pixelpunk" hidden>
-                <div class="page">
-                    <div class="column-small">
-                        <div class="textbox">
-                            <p>
-                                Welcome to the world of PixelPunk, an adventure game created entirely inside the Windows console.
-                            </p>
-                            <p>
-                                This is a simple demo of some of the capabilities that I have been working on, such as animations, screen scrolling, and NPC dialogue!
-                            </p>
-                            <p>
-                                NOTE: This demo was designed and tested on Windows 10. Other versions of Windows may not run the game properly.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="column-big">
-                        <img src="Images/PixelPunk/Title.webp" alt="Pixel Punk">
-                        <iframe allowfullscreen src="https://www.youtube.com/embed/aw48OyrWVCQ?si=DzunV3VPGhFCa8Z6"
-                                style="border: none; width: 100%; aspect-ratio: 16/9;"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin">
-                        </iframe>
-                        <iframe frameborder="0" src="https://itch.io/embed/3091018?linkback=true&amp;border_width=2&amp;bg_color=0C0C0C&amp;fg_color=CCCCCC&amp;link_color=e74856&amp;border_color=CCCCCC" width="554" height="169">
-                            <a href="https://thedarkthatbarks.itch.io/pixelpunk">
-                                PixelPunk by TheDarkThatBarks
-                            </a>
-                        </iframe>
-                        <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                            <h2>Technical Overview</h2>
-                            <img src="Images/HackerMan/Down Arrow.webp" alt="Down Arrow">
-                        </button>-->
-                    </div>
-                    <div class="column-small">
-                        <img class="project" src="Images/PixelPunk/Room1.webp" alt="Starting Room">
-                        <img class="project" src="Images/PixelPunk/Room2.webp" alt="Second Room">
+                <div class="column-small">
+                    <div class="textbox">
+                        <p>
+                            Welcome to the world of PixelPunk, an adventure game created entirely inside the Windows console.
+                        </p>
+                        <p>
+                            This is a simple demo of some of the capabilities that I have been working on, such as animations, screen scrolling, and NPC dialogue!
+                        </p>
+                        <p>
+                            NOTE: This demo was designed and tested on Windows 10. Other versions of Windows may not run the game properly.
+                        </p>
                     </div>
                 </div>
-        
-                <!--<div class="page">
-                    <div class="column-big">
-                        <button class="button page" onclick="changePage(this)" data-dir="up">
-                            <h2>Overview</h2>
-                            <img src="Images/HackerMan/Down Arrow.webp" style="transform: rotate(180deg);" alt="Up Arrow">
-                        </button>
-                    </div>
-                    <div class="column-big">
-                        <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
-                    </div>
-                </div>-->
+                <div class="column-big">
+                    <img src="Images/PixelPunk/Title.webp" alt="Pixel Punk">
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/aw48OyrWVCQ?si=DzunV3VPGhFCa8Z6"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                    <iframe frameborder="0" src="https://itch.io/embed/3091018?linkback=true&amp;border_width=2&amp;bg_color=0C0C0C&amp;fg_color=CCCCCC&amp;link_color=e74856&amp;border_color=CCCCCC" width="554" height="169">
+                        <a href="https://thedarkthatbarks.itch.io/pixelpunk">
+                            PixelPunk by TheDarkThatBarks
+                        </a>
+                    </iframe>
+                </div>
+                <div class="column-small">
+                    <img class="project" src="Images/PixelPunk/Room1.webp" alt="Starting Room">
+                    <img class="project" src="Images/PixelPunk/Room2.webp" alt="Second Room">
+                </div>
         
                 <button class="close" onclick="closeProject()">&#215;</button>
             </div>
     
             <div class="project" id="hackerman" hidden>
-                <div class="page">
-                    <div class="column-small">
-                        <div class="textbox">
-                            <p>
-                                HackerMan is a concept for a hacking minigame. Navigate your little square around a randomly generated maze to get to the blue terminals. At the terminals, solve the puzzle by swapping the pieces. Once you complete all of the terminals, you will get pulled out Mission Impossible style!
-                            </p>
-                            <p>
-                                Press Enter to Start. Press Space to navigate the menus and complete the puzzles. Use Arrow Keys to move.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="column-big">
-                        <h1>HackerMan</h1>
-                        <iframe allowfullscreen src="https://www.youtube.com/embed/NUhqsyXyBiw?si=z35vvjkfDj1Gz6j9"
-                                style="border: none; width: 100%; aspect-ratio: 16/9;"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin">
-                        </iframe>
-                        <iframe frameborder="0" src="https://itch.io/embed/3061343?linkback=true&amp;border_width=2&amp;bg_color=0C0C0C&amp;fg_color=CCCCCC&amp;border_color=CCCCCC" width="554" height="169">
-                            <a href="https://thedarkthatbarks.itch.io/hackerman">
-                                HackerMan by TheDarkThatBarks
-                            </a>
-                        </iframe>
-                        <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                            <h2>Technical Overview</h2>
-                            <img src="Images/HackerMan/Down Arrow.webp" alt="Down Arrow">
-                        </button>-->
-                    </div>
-                    <div class="column-small">
-                        <img class="project" src="Images/HackerMan/Title.webp" alt="Title Screen">
-                        <img class="project" src="Images/HackerMan/Medium.webp" alt="Medium Level">
-                        <img class="project" src="Images/HackerMan/Puzzle.webp" alt="Swapping Puzzle">
+                <div class="column-small">
+                    <div class="textbox">
+                        <p>
+                            HackerMan is a concept for a hacking minigame. Navigate your little square around a randomly generated maze to get to the blue terminals. At the terminals, solve the puzzle by swapping the pieces. Once you complete all of the terminals, you will get pulled out Mission Impossible style!
+                        </p>
+                        <p>
+                            Press Enter to Start. Press Space to navigate the menus and complete the puzzles. Use Arrow Keys to move.
+                        </p>
                     </div>
                 </div>
-        
-                <!--<div class="page">
-                    <div class="column-big">
-                        <button class="button page" onclick="changePage(this)" data-dir="up">
-                            <h2>Overview</h2>
-                            <img src="Images/HackerMan/Down Arrow.webp" style="transform: rotate(180deg);" alt="Up Arrow">
-                        </button>
-                    </div>
-                    <div class="column-big">
-                        <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
-                    </div>
-                </div>-->
+                <div class="column-big">
+                    <h1>HackerMan</h1>
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/NUhqsyXyBiw?si=z35vvjkfDj1Gz6j9"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                    <iframe frameborder="0" src="https://itch.io/embed/3061343?linkback=true&amp;border_width=2&amp;bg_color=0C0C0C&amp;fg_color=CCCCCC&amp;border_color=CCCCCC" width="554" height="169">
+                        <a href="https://thedarkthatbarks.itch.io/hackerman">
+                            HackerMan by TheDarkThatBarks
+                        </a>
+                    </iframe>
+                </div>
+                <div class="column-small">
+                    <img class="project" src="Images/HackerMan/Title.webp" alt="Title Screen">
+                    <img class="project" src="Images/HackerMan/Medium.webp" alt="Medium Level">
+                    <img class="project" src="Images/HackerMan/Puzzle.webp" alt="Swapping Puzzle">
+                </div>
         
                 <button class="close" onclick="closeProject()">&#215;</button>
             </div>
     
             <div class="project" id="campusconnect" hidden>
-                <div class="page">
-                    <div class="column-small">
-                        <div class="textbox">
-                            <div class="details-container">
-                                <h2 class="details">Project Details</h2>
-                                <div class="details-table">
-                                    <div class="details">
-                                        <h3>Role</h3>
-                                        <p>Programmer</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Software</h3>
-                                        <p>Render, MongoDB, OAuth</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Development Time</h3>
-                                        <p>2 weeks</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Languages</h3>
-                                        <p>HTML, JavaScript, CSS</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Team Size</h3>
-                                        <p>4</p>
-                                    </div>
-                                    <div class="details">
-                                        <h3>Release Date</h3>
-                                        <p>April 2024</p>
-                                    </div>
+                <div class="column-small">
+                    <div class="textbox">
+                        <div class="details-container">
+                            <h2 class="details">Project Details</h2>
+                            <div class="details-table">
+                                <div class="details">
+                                    <h3>Role</h3>
+                                    <p>Programmer</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Software</h3>
+                                    <p>Render, MongoDB, OAuth</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Development Time</h3>
+                                    <p>2 weeks</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Languages</h3>
+                                    <p>HTML, JavaScript, CSS</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Team Size</h3>
+                                    <p>4</p>
+                                </div>
+                                <div class="details">
+                                    <h3>Release Date</h3>
+                                    <p>April 2024</p>
                                 </div>
                             </div>
-                            <p>
-                                Campus Connect is an application designed specifically for WPI students to get more involved on campus via club engagement or to help students meet others informally through a posting board.
-                            </p>
-                            <p>
-                                Campus Connect covers 3 key functionalities for WPI students: allowing students to post messages about classes, meetings, social events, or just needing some one to get dinner with; allowing clubs and students to create public events on a calendar, streamlining club evemt attendance; and allowing students to create their own personal calendars from the list events on the public calendar.
-                            </p>
                         </div>
-                    </div>
-                    <div class="column-big">
-                        <h1>Campus Connect</h1>
-                        <h2 class="button" onclick="window.open('https:\/\/campus-connect-9c83.onrender.com')">Website</h2>
-                        <iframe allowfullscreen src="https://www.youtube.com/embed/POzYPvudWPI?si=SJnfQvH75vqS2Q60"
-                                style="border: none; width: 100%; aspect-ratio: 16/9;"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin">
-                        </iframe>
-                        <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                            <h2>Technical Overview</h2>
-                            <img src="Images/CampusConnect/Down Arrow.webp" alt="Down Arrow">
-                        </button>-->
-                    </div>
-                    <div class="column-small">
-                        <img class="project" src="Images/CampusConnect/Login.webp" alt="Login Page">
-                        <img class="project" src="Images/CampusConnect/Home.webp" alt="Home Page">
-                        <img class="project" src="Images/CampusConnect/Calendar.webp" alt="Personal Calendar Page">
+                        <p>
+                            Campus Connect is an application designed specifically for WPI students to get more involved on campus via club engagement or to help students meet others informally through a posting board.
+                        </p>
+                        <p>
+                            Campus Connect covers 3 key functionalities for WPI students: allowing students to post messages about classes, meetings, social events, or just needing some one to get dinner with; allowing clubs and students to create public events on a calendar, streamlining club evemt attendance; and allowing students to create their own personal calendars from the list events on the public calendar.
+                        </p>
                     </div>
                 </div>
-    
-                <!--<div class="page">
-                    <div class="column-big">
-                        <button class="button page" onclick="changePage(this)" data-dir="up">
-                            <h2>Overview</h2>
-                            <img src="Images/YourMusicIsTrash/Down Arrow.webp" style="transform: rotate(180deg);" alt="Up Arrow">
-                        </button>
-                    </div>
-                    <div class="column-big">
-                        <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
-                    </div>
-                </div>-->
+                <div class="column-big">
+                    <h1>Campus Connect</h1>
+                    <h2 class="button" onclick="window.open('https:\/\/campus-connect-9c83.onrender.com')">Website</h2>
+                    <iframe allowfullscreen src="https://www.youtube.com/embed/POzYPvudWPI?si=SJnfQvH75vqS2Q60"
+                            style="border: none; width: 100%; aspect-ratio: 16/9;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
+                </div>
+                <div class="column-small">
+                    <img class="project" src="Images/CampusConnect/Login.webp" alt="Login Page">
+                    <img class="project" src="Images/CampusConnect/Home.webp" alt="Home Page">
+                    <img class="project" src="Images/CampusConnect/Calendar.webp" alt="Personal Calendar Page">
+                </div>
     
                 <button class="close" onclick="closeProject()">&#215;</button>
             </div>
     
             <div class="project" id="sudokusolver" hidden>
-                <div class="page">
-                    <div class="column-small">
-                        <div class="textbox">
-                            <p>
-                                This is a simple Sudoku solver that can solve all but the most extreme Sudoku puzzles.
-                            </p>
-                            <p>
-                                Enter your own Sudoku puzzle or press "Setup" to load a preconfigured one. Then just press "Solve" to solve the puzzle! The "Step" button goes through one iteration at a time. The "Reset" button clears the board.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="column-big">
-                        <h1>Sudoku Solver</h1>
-                        <iframe src="https://raw.githack.com/TheDarkThatBarks/SudokuSolver/main/index.html"
-                                style="width: 100%; height: 100%;">
-                        </iframe>
-                        <!--<button class="button page" onclick="changePage(this)" data-dir="down">
-                            <h2>Technical Overview</h2>
-                            <img src="Images/SudokuSolver/Down Arrow.webp" alt="Down Arrow">
-                        </button>-->
-                    </div>
-                    <div class="column-small">
-                        <label>X-Wing</label>
-                        <img class="project" src="Images/SudokuSolver/X-Wing.webp" alt="X-Wing Technique">
-                        <label>Swordfish</label>
-                        <img class="project" src="Images/SudokuSolver/Swordfish.webp" alt="Swordfish Technique">
+                <div class="column-small">
+                    <div class="textbox">
+                        <p>
+                            This is a simple Sudoku solver that can solve all but the most extreme Sudoku puzzles.
+                        </p>
+                        <p>
+                            Enter your own Sudoku puzzle or press "Setup" to load a preconfigured one. Then just press "Solve" to solve the puzzle! The "Step" button goes through one iteration at a time. The "Reset" button clears the board.
+                        </p>
                     </div>
                 </div>
-        
-                <!--<div class="page">
-                    <div class="column-big">
-                        <button class="button page" onclick="changePage(this)" data-dir="up">
-                            <h2>Overview</h2>
-                            <img src="Images/HackerMan/Down Arrow.webp" style="transform: rotate(180deg);" alt="Up Arrow">
-                        </button>
-                    </div>
-                    <div class="column-big">
-                        <img class="project" src="Images/CozyCoast/Title.webp" alt="Title Screen">
-                    </div>
-                </div>-->
+                <div class="column-big">
+                    <h1>Sudoku Solver</h1>
+                    <iframe src="https://raw.githack.com/TheDarkThatBarks/SudokuSolver/main/index.html"
+                            style="width: 100%; height: 100%;">
+                    </iframe>
+                </div>
+                <div class="column-small">
+                    <label>X-Wing</label>
+                    <img class="project" src="Images/SudokuSolver/X-Wing.webp" alt="X-Wing Technique">
+                    <label>Swordfish</label>
+                    <img class="project" src="Images/SudokuSolver/Swordfish.webp" alt="Swordfish Technique">
+                </div>
         
                 <button class="close" onclick="closeProject()">&#215;</button>
             </div>
         </div>
 
         <div class="mobile">
+            <div class="project" id="memoria-altera" hidden>
+                <div class="column-big">
+                    <h1>Memoria Altera</h1>
+                    <div class="details-container">
+                        <h2 class="details">Project Details</h2>
+                        <div class="details-table">
+                            <div class="details">
+                                <h3>Role</h3>
+                                <p>Tech Coordinator, Cutscene Programmer</p>
+                            </div>
+                            <div class="details">
+                                <h3>Software</h3>
+                                <p>Unreal 5, Git</p>
+                            </div>
+                            <div class="details">
+                                <h3>Development Time</h3>
+                                <p>9 Months</p>
+                            </div>
+                            <div class="details">
+                                <h3>Language</h3>
+                                <p>Blueprints</p>
+                            </div>
+                            <div class="details">
+                                <h3>Team Size</h3>
+                                <p>6</p>
+                            </div>
+                            <div class="details">
+                                <h3>Release Date</h3>
+                                <p>May 2025</p>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <h3>Awards</h3>
+                            <p>IMGD Provost Award, WPI Showfest 2025</p>
+                            <p>Featured at PAX EAST 2025</p>
+                        </div>
+                    </div>
+                    <iframe src="https://store.steampowered.com/widget/3688120/"
+                            frameborder="0" style="width: 50%; min-height: 15vh;">
+                    </iframe>
+                    <iframe frameborder="0"
+                            src="https://itch.io/embed/3525547?border_width=2&amp;bg_color=000000&amp;fg_color=2ce8f4&amp;link_color=2ce8f4&amp;border_color=333333"
+                            width="50%">
+                        <a href="https://thedarkthatbarks.itch.io/memoria-altera">
+                            Memoria Altera by TheDarkThatBarks, Keenan, hayyyyyden, AwokenOwen, ThoughtlessPerspective, hammersorethumb
+                        </a>
+                    </iframe>
+                    <h2>About</h2>
+                        <div class="textbox">    
+                            <p><i>Memoria Altera</i> is a narrative-driven puzzle game where you wake up on the floor suffering from amnesia. You must explore the futuristic lab you woke up in to recover your memories with the aid of a fellow amnesiac who is just as confused as you are. Venture deeper into the lab and unravel the secrets of who you were before losing your memories!</p>
+                            <p>This game was completed as part of my senior capstone project at Worcester Polytechnic Institute by a team of 6 core members and 2 contracted workers.</p>
+                            <p>I and my fellow programmer Owen Knizak started as both general programmers, planning to split the programming tasks between the two of us evenly. However, Owen was rediagnosed with brain cancer halfway through the year. This led to us bringing in another programmer to help out, and myself transitioning to the role of tech coordinator.</p>
+                        </div>
+                    <h2>Cutscene System</h2>
+                        <div class="textbox">
+                            <p>The system that composed the majority of my work on <i>Memoria Altera</i> was a cutscene camera system. Unreal Engine has its own built-in cinematic camera system, but we felt that it lacked the level of interaction that we desired to easily implement quick time events and other forms of player interaction during cinematic moments.</p>
+                            <img src="Images/MemoriaAltera/Cutscene.gif" alt="Cutscene">
+                            <p>Example of a Quick Time Event in a cutscene in <i>Memoria Altera</i></p>
+                        </div>
+                    <h3>Core Components</h3>
+                        <div class="textbox">
+                            <p>To implement this camera system, I created 3 core components.</p>
+                            <p>The first of which is a spline path. A spline is a series of points connected by curves. These are incredibly useful for making paths in the engine's editor, as you can place the points and angle the curves between them very easily.</p>
+                            <p>The second component is the main loop. The diagram below is a simplified version of the actual code, but it captures the essence.</p>
+                            <img src="Images/MemoriaAltera/MainLoop.png" alt="Main Loop">
+                            <p>Flow Diagram of Cutscene Camera Main Loop</p>
+                        </div>
+                    <h3>Nodes System</h3>
+                        <div class="textbox">
+                            <p>The third core component of this camera system are the nodes that can be placed along the path. These nodes can control the behavior of the cutscene camera as well as the game world.</p>
+                            <table id="nodes">
+                                <tr>
+                                    <th>Node</th>
+                                    <th>Purpose</th>
+                                    <th>Parameters</th>
+                                </tr>
+                                <tr>
+                                    <td>Speed</td>
+                                    <td>Controls the speed of the camera</td>
+                                    <td>Distance/Time, New Speed, Time Dilation, Easing Function, Transition Time</td>
+                                </tr>
+                                <tr>
+                                    <td>Rotation</td>
+                                    <td>Controls the rotation of the camera</td>
+                                    <td>Distance/Time, New Rotation, Use Shortest Path?, Easing Function, Use Spline Rotation?, Use Mouse Rotation?, Transition Time</td>
+                                </tr>
+                                <tr>
+                                    <td>Trigger</td>
+                                    <td>Triggers event in the game world</td>
+                                    <td>Distance/Time, Trigger Class</td>
+                                </tr>
+                                <tr>
+                                    <td>Quick Time Event</td>
+                                    <td>Starts QTE</td>
+                                    <td>Distance/Time, Key, Time to Complete, Time Dilation, Spam Event?, Pause Movement?, QTE Class</td>
+                                </tr>
+                                <tr>
+                                    <td>Move Key</td>
+                                    <td>Force player to hold key to move forward</td>
+                                    <td>Distance/Time, Key</td>
+                                </tr>
+                            </table>
+                            <img src="Images/MemoriaAltera/Nodes.png" alt="Nodes">
+                            <p>Example of nodes placed along a camera path</p>
+                        </div>
+                    <h2>Puzzle and Interaction System</h2>
+                        <div class="textbox">
+                            <p>To implement player interaction and puzzles, we created a custom Interactable interface and a PuzzleBase class</p>
+                        </div>
+                    <h3>Interactable Interface</h3>
+                        <div class="textbox">
+                            <p></p>
+                            <img src="Images/MemoriaAltera/Highlight.gif" alt="Highlight">
+                            <p>Example of proximity highlight effect</p>
+                        </div>
+                    <h3>Puzzle Base</h3>
+                        <div class="textbox">
+                            <img src="Images/MemoriaAltera/PuzzleClasses.png" alt="Puzzle Classes">
+                            <p>Class Diagram of Puzzle classes</p>
+                            <p>All puzzle classes are children of the PuzzleBase class. This class has default implementations of OnInteract, LeaveInteract, and PuzzleComplete.</p>
+                            <p></p>
+                            <!-- <img> -->
+                        </div>
+                </div>
+                <button class="close" onclick="closeProject()"></button>
+            </div>
+
             <div class="project" id="cozycoast" title="Cozy Coast" hidden>
                 <div class="page">
                     <div class="column-big">

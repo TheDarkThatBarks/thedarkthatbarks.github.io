@@ -1,27 +1,26 @@
-let body, projectWidth, projectHeight;
-const widthPercent = 0.95;
-const heightPercent = 0.95;
-
-let currentProject = null;
-// let clone = null;
-
 const desktop = window.matchMedia("(orientation: landscape)").matches;
 
+const widthPercent = desktop ? 0.95 : 0.99;
+const heightPercent = desktop ? 0.95 : 0.99;
+let currentProject = null;
+
 const refresh = function () {
-    projectWidth = widthPercent * window.visualViewport.width;
-    projectHeight = heightPercent * window.visualViewport.height;
+    const projectHeight = heightPercent * window.visualViewport.height;
 
-    const button = currentProject.querySelector(".close");
-    button.style.fontSize = `${projectHeight * 0.08 * 0.8}px`;
+    const lastCol = currentProject.querySelector(".column-small:nth-last-child(2)");
+    if (lastCol) {
+        lastCol.style.marginRight = `-${projectHeight * 0.08 + 26}px`;
 
-    currentProject.querySelector(".column-small:nth-last-child(2) > *:first-child").style.marginTop = `${projectHeight * 0.1}px`;
+        const lastColFirstItem = currentProject.querySelector(".column-small:nth-last-child(2) > *:first-child");
+        if (lastColFirstItem)
+            lastColFirstItem.style.marginTop = `${projectHeight * 0.1}px`;
+    }
     
     const details = currentProject.querySelector(".details-table");
     if (details)
-        details.style.gridTemplateRows = `repeat(${desktop ? 3 : 2}, ${desktop ? (projectHeight * 0.35 / 3) : (projectHeight * 0.24 / 2)}px)`;
+        // details.style.gridTemplateRows = `repeat(${desktop ? 3 : 2}, ${desktop ? (projectHeight * 0.35 / 3) : (projectHeight * 0.24 / 2)}px)`;
+        details.style.gridTemplateRows = `repeat(3, auto)`;
 };
-
-const delay = (time) => new Promise(resolve => setTimeout(resolve, time));
 
 const showProject = function(thumbnail) {
     if (currentProject) {
@@ -51,25 +50,33 @@ const showProject = function(thumbnail) {
     clone.style.height = `${box.height}px`;
     clone.style.width = `${box.width}px`;
     setTimeout(() => {
-        clone.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
-        clone.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
+        clone.style.top = `${(100 - heightPercent * 100) / 2}vh`
+        clone.style.left = `${(100 - widthPercent * 100) / 2}vw`;
         clone.style.width = `${widthPercent * 100}vw`;
         clone.style.height = `${heightPercent * 100}vh`;
         newBackground.style.opacity = "1";
     }, 1);
 
-    project.style.top = `${0.5 * window.visualViewport.height - projectHeight / 2 + window.visualViewport.offsetTop}px`;
-    project.style.left = `${0.5 * window.visualViewport.width - projectWidth / 2 + window.visualViewport.offsetLeft}px`;
+    project.style.top = `${(100 - heightPercent * 100) / 2}vh`
+    project.style.left = `${(100 - widthPercent * 100) / 2}vw`;
     project.style.width = `${widthPercent * 100}vw`;
     project.style.height = `${heightPercent * 100}vh`;
     project.style.fontSize = "5px";
     project.style.display = "flex";
+    
+    document.querySelector("#back").style.zIndex = "2";
+    document.querySelector("#back").style.opacity = "0.6";
+
+    setTimeout(() => {
+        project.scrollTop = 0;
+        project.scrollMarginTop = 0;
+    }, 500);
     setTimeout(() => {
         project.style.opacity = "1";
         project.style.fontSize = "16px";
     }, 750);
-    document.querySelector("#back").style.zIndex = "2";
-    document.querySelector("#back").style.opacity = "0.6";
+
+    document.body.style.overflowY = "hidden";
 };
 
 const closeProject = function () {
@@ -101,6 +108,7 @@ const closeProject = function () {
             project.style.display = "none";
             document.querySelector("#back").style.opacity = "0";
             clone.querySelector("div").style.opacity = "0";
+
             setTimeout(() => {
                 document.querySelector("#back").style.zIndex = "-2";
             }, 500);
@@ -109,6 +117,8 @@ const closeProject = function () {
                 thumbnail.dataset.open = "0";
             }, 750);
         }, 500);
+
+        document.body.style.overflowY = "initial";
     }
 };
 
@@ -127,7 +137,6 @@ const backgroundAnimation = function () {
         char.style.left = `${Math.random() * (main.width * 0.8) + main.width * 0.1}px`;
         char.style.top = `${Math.random() * (main.height * 0.9)}px`;
         document.querySelector("#background").appendChild(char);
-        //char.style.opacity = "0.6";
         char.style.animationPlayState = "running";
         setTimeout(() => removeChar(char), 3000);
     }, 100);
@@ -139,14 +148,11 @@ const removeChar = function (element) {
     setTimeout(() => {
         element.remove();
     }, 2000);
-    //element.style.opacity = "0";
 };
 
-document.addEventListener("scroll", (event) => {
-    const nav = document.querySelector("#hidden-nav");
-    const navHeight = document.querySelector("nav").getBoundingClientRect().top - parseFloat(getComputedStyle(nav).paddingTop) + window.scrollY;
-    //console.log("onscroll", navHeight);
-    nav.style.visibility = window.scrollY > navHeight ? "visible" : "hidden";
+document.addEventListener("scroll", () => {
+    const nav = document.querySelector("nav");
+    nav.classList.toggle("floating", nav.getBoundingClientRect().top === parseInt(getComputedStyle(nav).top));
 });
 
 window.onload = function (event) {
@@ -154,27 +160,20 @@ window.onload = function (event) {
 };
 
 const fixAnchors = function () {
-    const nav = document.querySelector("#hidden-nav");
+    const nav = document.querySelector("#nav");
     document.querySelectorAll(".anchor").forEach((element) => {
         element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 30}px`;
     });
 };
 
-const revealDetails = function (details) {
-    if (details.dataset.open == "1") {
-        details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height}px`;
-        details.dataset.open = "0";
-        details.querySelector(".arrow").style.transform = "rotate(0)";
-    } else {
-        details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-table").getBoundingClientRect().height}px`;
-        details.dataset.open = "1";
-        details.querySelector(".arrow").style.transform = "rotate(90deg)";
-    }
-};
-
-const changePage = function (button) {
-    console.log(currentProject.scrollTop);
-    const pages = Array.from(currentProject.querySelectorAll("div.page"));
-    const page = pages.indexOf(button.closest("div.page")) + (button.dataset.dir === "down" ? 1 : -1);
-    currentProject.scroll(0, page * projectHeight);
-};
+// const revealDetails = function (details) {
+//     if (details.dataset.open == "1") {
+//         details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height}px`;
+//         details.dataset.open = "0";
+//         details.querySelector(".arrow").style.transform = "rotate(0)";
+//     } else {
+//         details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-table").getBoundingClientRect().height}px`;
+//         details.dataset.open = "1";
+//         details.querySelector(".arrow").style.transform = "rotate(90deg)";
+//     }
+// };
