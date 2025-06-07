@@ -37,6 +37,13 @@ const showProject = function(thumbnail) {
     clone.style.backgroundImage = getComputedStyle(thumbnail).backgroundImage;
     clone.classList.add("thumbnail-clone");
     clone.id = "clone";
+
+    const box = thumbnail.getBoundingClientRect();
+    console.log(box);
+    clone.style.top = `${box.top}px`;
+    clone.style.left = `${box.left}px`;
+    clone.style.height = `${box.height}px`;
+    clone.style.width = `${box.width}px`;
     document.body.appendChild(clone);
 
     const newBackground = document.createElement("div");
@@ -44,21 +51,16 @@ const showProject = function(thumbnail) {
     newBackground.style.backgroundImage = getComputedStyle(currentProject).backgroundImage;
     clone.appendChild(newBackground);
 
-    const box = thumbnail.getBoundingClientRect();
-    clone.style.top = `${box.top}px`;
-    clone.style.left = `${box.left}px`;
-    clone.style.height = `${box.height}px`;
-    clone.style.width = `${box.width}px`;
     setTimeout(() => {
-        clone.style.top = `${(100 - heightPercent * 100) / 2}vh`
-        clone.style.left = `${(100 - widthPercent * 100) / 2}vw`;
+        clone.style.top = desktop ? `${(100 - heightPercent * 100) / 2}vh` : "2.5px";
+        clone.style.left = desktop ? `${(100 - widthPercent * 100) / 2}vw` : "2.5px";
         clone.style.width = `${widthPercent * 100}vw`;
         clone.style.height = `${heightPercent * 100}vh`;
         newBackground.style.opacity = "1";
     }, 1);
-
-    project.style.top = `${(100 - heightPercent * 100) / 2}vh`
-    project.style.left = `${(100 - widthPercent * 100) / 2}vw`;
+    
+    project.style.top = desktop ? `${(100 - heightPercent * 100) / 2}vh` : "2.5px";
+    project.style.left = desktop ? `${(100 - widthPercent * 100) / 2}vw` : "2.5px";
     project.style.width = `${widthPercent * 100}vw`;
     project.style.height = `${heightPercent * 100}vh`;
     project.style.fontSize = "5px";
@@ -152,7 +154,7 @@ const removeChar = function (element) {
 
 document.addEventListener("scroll", () => {
     const nav = document.querySelector("nav");
-    nav.classList.toggle("floating", nav.getBoundingClientRect().top === parseInt(getComputedStyle(nav).top));
+    nav.classList.toggle("floating", desktop && nav.getBoundingClientRect().top === parseInt(getComputedStyle(nav).top));
 });
 
 window.onload = function (event) {
@@ -160,7 +162,7 @@ window.onload = function (event) {
 };
 
 const fixAnchors = function () {
-    const nav = document.querySelector("#nav");
+    const nav = document.querySelector("nav");
     document.querySelectorAll(".anchor").forEach((element) => {
         element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 30}px`;
     });
