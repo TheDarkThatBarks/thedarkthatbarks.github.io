@@ -1,10 +1,27 @@
-const desktop = window.matchMedia("(orientation: landscape)").matches;
-
-const widthPercent = desktop ? 0.95 : 0.99;
-const heightPercent = desktop ? 0.95 : 0.99;
+let widthPercent, heightPercent;
 let currentProject = null;
 
+window.onload = function (event) {
+    backgroundAnimation();
+};
+
+const mql = window.matchMedia("(orientation: landscape)");
+let landscape = mql.matches;
+mql.onchange = function (event) {
+    landscape = event.matches;
+    fixAnchors();
+};
+
+const fixAnchors = function () {
+    const nav = document.querySelector("nav");
+    document.querySelectorAll(".anchor").forEach((element) => {
+        element.style.scrollMarginTop = landscape ? `${nav.getBoundingClientRect().height + 30}px` : "0";
+    });
+};
+
 const refresh = function () {
+    widthPercent = landscape ? 0.95 : 0.99;
+    heightPercent = landscape ? 0.95 : 0.99;
     const projectHeight = heightPercent * window.visualViewport.height;
 
     const lastCol = currentProject.querySelector(".column-small:nth-last-child(2)");
@@ -18,7 +35,6 @@ const refresh = function () {
     
     const details = currentProject.querySelector(".details-table");
     if (details)
-        // details.style.gridTemplateRows = `repeat(${desktop ? 3 : 2}, ${desktop ? (projectHeight * 0.35 / 3) : (projectHeight * 0.24 / 2)}px)`;
         details.style.gridTemplateRows = `repeat(3, auto)`;
 };
 
@@ -29,7 +45,7 @@ const showProject = function(thumbnail) {
     }
 
     thumbnail.dataset.open = "1";
-    const project = document.querySelector(`.${desktop ? "desktop" : "mobile"} > #${thumbnail.classList[0]}`);
+    const project = document.querySelector(`.${landscape ? "landscape" : "portrait"} > #${thumbnail.classList[0]}`);
     currentProject = project;
     refresh();
 
@@ -39,7 +55,6 @@ const showProject = function(thumbnail) {
     clone.id = "clone";
 
     const box = thumbnail.getBoundingClientRect();
-    console.log(box);
     clone.style.top = `${box.top}px`;
     clone.style.left = `${box.left}px`;
     clone.style.height = `${box.height}px`;
@@ -51,18 +66,22 @@ const showProject = function(thumbnail) {
     newBackground.style.backgroundImage = getComputedStyle(currentProject).backgroundImage;
     clone.appendChild(newBackground);
 
+    const newTop = landscape ? `${(100 - heightPercent * 100) / 2}vh` : "2.5px";
+    const newLeft = landscape ? `${(100 - widthPercent * 100) / 2}vw` : "2.5px";
+    const newWidth = `${widthPercent * 100}vw`;
+    const newHeight = `${heightPercent * 100}vh`;
     setTimeout(() => {
-        clone.style.top = desktop ? `${(100 - heightPercent * 100) / 2}vh` : "2.5px";
-        clone.style.left = desktop ? `${(100 - widthPercent * 100) / 2}vw` : "2.5px";
-        clone.style.width = `${widthPercent * 100}vw`;
-        clone.style.height = `${heightPercent * 100}vh`;
+        clone.style.top = newTop;
+        clone.style.left = newLeft;
+        clone.style.width = newWidth;
+        clone.style.height = newHeight;
         newBackground.style.opacity = "1";
     }, 1);
     
-    project.style.top = desktop ? `${(100 - heightPercent * 100) / 2}vh` : "2.5px";
-    project.style.left = desktop ? `${(100 - widthPercent * 100) / 2}vw` : "2.5px";
-    project.style.width = `${widthPercent * 100}vw`;
-    project.style.height = `${heightPercent * 100}vh`;
+    project.style.top = newTop;
+    project.style.left = newLeft;
+    project.style.width = newWidth;
+    project.style.height = newHeight;
     project.style.fontSize = "5px";
     project.style.display = "flex";
     
@@ -132,7 +151,7 @@ document.addEventListener("click", function (event) {
 const backgroundAnimation = function () {
     setInterval(() => {
         const char = document.createElement("p");
-        char.className = "randLetter";
+        char.classList.add("randLetter");
         const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=;:\'\"[{]}\\|`~,<.>/?";
         char.innerHTML = characters.charAt(Math.floor(Math.random() * characters.length));
         const main = document.querySelector("#main").getBoundingClientRect();
@@ -154,28 +173,5 @@ const removeChar = function (element) {
 
 document.addEventListener("scroll", () => {
     const nav = document.querySelector("nav");
-    nav.classList.toggle("floating", desktop && nav.getBoundingClientRect().top === parseInt(getComputedStyle(nav).top));
+    nav.classList.toggle("floating", landscape && nav.getBoundingClientRect().top === parseInt(getComputedStyle(nav).top));
 });
-
-window.onload = function (event) {
-    backgroundAnimation();
-};
-
-const fixAnchors = function () {
-    const nav = document.querySelector("nav");
-    document.querySelectorAll(".anchor").forEach((element) => {
-        element.style.scrollMarginTop = `${nav.getBoundingClientRect().height + 30}px`;
-    });
-};
-
-// const revealDetails = function (details) {
-//     if (details.dataset.open == "1") {
-//         details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height}px`;
-//         details.dataset.open = "0";
-//         details.querySelector(".arrow").style.transform = "rotate(0)";
-//     } else {
-//         details.style.height = `${details.querySelector(".button.details").getBoundingClientRect().height + details.querySelector(".details-table").getBoundingClientRect().height}px`;
-//         details.dataset.open = "1";
-//         details.querySelector(".arrow").style.transform = "rotate(90deg)";
-//     }
-// };

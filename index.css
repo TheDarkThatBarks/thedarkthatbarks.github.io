@@ -29,13 +29,13 @@
     initial-value: rgb(198, 146, 91);
 }
 
-@property --yourmusicistrash {
+@property --your-music-is-trash {
     syntax: "<color>";
     inherits: false;
     initial-value: rgb(255, 255, 0);
 }
 
-@property --campusconnect {
+@property --campus-connect {
     syntax: "<color>";
     inherits: false;
     initial-value: rgb(172, 43, 55);
@@ -76,12 +76,9 @@ body {
 }
 
 nav {
-    width: auto;
     text-align: center;
     font-size: 150%;
 
-    /* position: sticky;
-    top: 0; */
     margin-top: 30px;
 
     z-index: 1;
@@ -94,8 +91,7 @@ nav {
     padding: 20px;
 
     display: flex;
-    width: 40%;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -111,15 +107,15 @@ nav a {
     text-wrap: nowrap;
     padding: 5px;
     margin: 10px;
-    border: 3px solid var(--outline);
+    outline: 3px solid var(--outline);
     text-decoration: none;
     color: var(--outline);
     background-color: var(--background);
 }
 
 nav a:hover {
-    border-width: 5px;
-    padding: 5px 3px;
+    outline-width: 5px;
+    padding: 5px 5px;
 }
 
 .anchor {
@@ -177,7 +173,6 @@ nav a:hover {
 .thumbnail-clone {
     aspect-ratio: auto;
     position: fixed;
-    /* position: absolute; */
     margin: 0;
     z-index: 3;
     
@@ -226,6 +221,14 @@ nav a:hover {
         width: 20%;
     }
 
+    .contact {
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: space-around;
+        justify-items: center;
+    }
+
     .contact a {
         min-width: 25%;
     }
@@ -267,7 +270,11 @@ nav a:hover {
     }
 
     iframe.game {
-        width: 50%;
+        width: 70%;
+    }
+
+    object.resume {
+        height: 600px;
     }
 }
 
@@ -279,7 +286,8 @@ nav a:hover {
 
     nav {
         flex-direction: column;
-        position: inline;
+        margin-top: 0;
+        margin-bottom: -50px;
     }
 
     .desktop {
@@ -307,6 +315,12 @@ nav a:hover {
         width: 50%;
     }
 
+    .contact {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .contact a {
         min-width: 50%;
     }
@@ -332,16 +346,20 @@ nav a:hover {
         height: fit-content;
     }
 
-    img.project {
-        height: 27%;
-    }
-
     .button-container {
         width: 75%;
     }
 
     iframe.game {
-        width: 80%;
+        width: 90%;
+    }
+
+    .close {
+        align-self: end;
+    }
+
+    object.resume {
+        height: 450px;
     }
 }
 
@@ -383,7 +401,7 @@ hr {
     background-image: url(Images/CozyCoast/Logo.webp);
 }
 
-.thumbnail.yourmusicistrash {
+.thumbnail.your-music-is-trash {
     background-image: url(Images/YourMusicIsTrash/Logo.webp);
 }
 
@@ -391,11 +409,11 @@ hr {
     background-image: url(Images/HackerMan/Logo.webp);
 }
 
-.thumbnail.campusconnect {
+.thumbnail.campus-connect {
     background-image: url(Images/CampusConnect/Logo.webp);
 }
 
-.thumbnail.sudokusolver {
+.thumbnail.sudoku-solver {
     background-image: url(Images/SudokuSolver/Logo.webp);
 }
 
@@ -474,17 +492,14 @@ img.project {
     max-width: 95%;
 }
 
-/* .column-big img + p {
-    margin-top: 0;
-} */
-
 .column-big > *:last-child {
     margin-bottom: 5%;
 }
 
 .close {
     position: sticky;
-    height: 8%;
+    min-height: 8%;
+    max-height: 8%;
     aspect-ratio: 1/1;
 
     top: 0;
@@ -498,7 +513,6 @@ img.project {
     cursor: pointer;
 
     transition: background-size 0.4s;
-    
 }
 
 .close:hover {
@@ -528,7 +542,6 @@ img.project {
 
 .details-container {
     width: 95%;
-    /*overflow: hidden;*/
     background-color: rgb(0 0 0 / 0.6);
     border: 1px solid white;
     border-radius: 15px;
@@ -546,18 +559,13 @@ img.project {
     border-color: var(--cozycoast);
 }
 
-#yourmusicistrash .details-container {
-    border-color: var(--yourmusicistrash);
+#your-music-is-trash .details-container {
+    border-color: var(--your-music-is-trash);
 }
 
-#campusconnect .details-container {
-    border-color: var(--campusconnect);
+#campus-connect .details-container {
+    border-color: var(--campus-connect);
 }
-
-/* .button.details {
-    margin-bottom: 0;
-    margin-top: 0;
-} */
 
 h2.details {
     font-size: 1.5em;
@@ -572,7 +580,6 @@ div.details > h3 {
 
 .details-table {
     overflow: hidden;
-    /* transition: height 0.4s ease-out; */
 
     display: grid;
     vertical-align: flex-start;
@@ -615,10 +622,6 @@ div.details > h3 {
     text-align: center;
     margin-top: 0;
 }
-
-/* .textbox > table {
-    
-} */
 
 #nodes {
     align-self: center;
@@ -685,10 +688,6 @@ div.page {
     transform: rotate(180deg);
 }
 
-/* iframe.game {
-    width: 100%;
-} */
-
 #memoria-altera {
     background-image: url(Images/MemoriaAltera/Background.png);
 }
@@ -697,15 +696,15 @@ div.page {
     background-image: url(Images/CozyCoast/Background.webp);
 }
 
-#campusconnect {
-    background-color: var(--campusconnect);
+#campus-connect {
+    background-color: var(--campus-connect);
 }
 
-#campusconnect .textbox {
+#campus-connect .textbox {
     background-color: rgb(144, 37, 48);
 }
 
-#campusconnect .button {
+#campus-connect .button {
     background-color: rgb(144, 37, 48);
 }
 
@@ -723,9 +722,9 @@ div.page {
     color: var(--cozycoast);
 }
 
-#yourmusicistrash *:not(.close) {
+#your-music-is-trash *:not(.close) {
     font-family: Typewriter;
-    color: var(--yourmusicistrash);
+    color: var(--your-music-is-trash);
 }
 
 #hackerman *:not(.close), #pixelpunk *:not(.close) {
@@ -733,23 +732,13 @@ div.page {
     color: rgb(204, 204, 204);
 }
 
-#campusconnect *:not(.close) {
+#campus-connect *:not(.close) {
     font-family: Times New Roman;
     color: rgb(255, 255, 255);
 }
 
 .contact {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center; */
     width: 40%;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    /* vertical-align: center; */
-    justify-content: space-around;
-    justify-items: center;
 }
 
 .contact a {
@@ -800,11 +789,23 @@ div.page {
 .randLetter {
     position: absolute;
     z-index: -1;
-    font-size: 3vw;
+    font-size: 5vh;
     opacity: 0;
 
     animation-name: makeVisible;
     animation-duration: 2s;
     animation-play-state: paused;
     animation-fill-mode: forwards;
+}
+
+.itch {
+    min-height: 169px;
+}
+
+.steam {
+    min-height: 190px;
+}
+
+object.resume {
+    width: 75%;
 }
