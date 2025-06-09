@@ -8,7 +8,30 @@ window.onload = function (event) {
 const mql = window.matchMedia("(orientation: landscape)");
 let landscape = mql.matches;
 mql.onchange = function (event) {
-    landscape = event.matches;
+    if (event.matches !== landscape && currentProject) {
+        landscape = event.matches;
+        refresh();
+        currentProject.style.display = "none";
+        currentProject = document.querySelector(`.${landscape ? "landscape" : "portrait"} > #${currentProject.id}`);
+        const newTop = landscape ? `${(100 - heightPercent * 100) / 2}vh` : "2.5px";
+        const newLeft = landscape ? `${(100 - widthPercent * 100) / 2}vw` : "2.5px";
+        const newWidth = `${widthPercent * 100}vw`;
+        const newHeight = `${heightPercent * 100}vh`;
+        currentProject.style.top = newTop;
+        currentProject.style.left = newLeft;
+        currentProject.style.width = newWidth;
+        currentProject.style.height = newHeight;
+        currentProject.style.opacity = "1";
+        currentProject.style.fontSize = "16px";
+        currentProject.style.display = "flex";
+        const clone = document.querySelector("#clone");
+        clone.style.top = newTop;
+        clone.style.left = newLeft;
+        clone.style.width = newWidth;
+        clone.style.height = newHeight;
+    } else {
+        landscape = event.matches;
+    }
     fixAnchors();
 };
 
@@ -38,7 +61,7 @@ const refresh = function () {
         details.style.gridTemplateRows = `repeat(3, auto)`;
 };
 
-const showProject = function(thumbnail) {
+const showProject = function (thumbnail) {
     if (currentProject) {
         closeProject();
         return;
