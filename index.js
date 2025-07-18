@@ -127,6 +127,8 @@ const closeProject = function () {
     if (currentProject) {
         const project = currentProject;
         currentProject = null;
+
+        project.querySelectorAll('iframe').forEach((e) => e.src = e.src);
         
         const thumbnail = document.querySelector(`.${project.id}.thumbnail`);
         const clone = document.querySelector("#clone");
