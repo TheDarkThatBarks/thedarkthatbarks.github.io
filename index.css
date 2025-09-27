@@ -741,7 +741,7 @@ div.page {
     width: 40%;
 }
 
-.contact a {
+.contact a, .flickr {
     margin: 1%;
     font-size: 150%;
     color: var(--outline);
@@ -754,7 +754,7 @@ div.page {
     width: fit-content;
 }
 
-.contact img {
+.contact img, .flickr img {
     height: 10vh;
     aspect-ratio: 1/1;
 }
